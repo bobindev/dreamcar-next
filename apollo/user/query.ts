@@ -458,7 +458,7 @@ export const GET_BOARD_ARTICLES = gql`
 			}
 		}
 	}
-`;
+`; 
 
 /**************************
  *         COMMENT        *

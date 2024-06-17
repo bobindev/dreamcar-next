@@ -12,10 +12,11 @@ import { userVar } from '../../../apollo/store';
 
 interface TopPropertyCardProps {
 	property: Property;
+  likePropertyHanler: any
 }
 
 const TopPropertyCard = (props: TopPropertyCardProps) => {
-	const { property } = props;
+	const { property, likePropertyHanler } = props;
 	const device = useDeviceDetect();
 	const router = useRouter();
 	const user = useReactiveVar(userVar);
@@ -113,7 +114,7 @@ const TopPropertyCard = (props: TopPropertyCardProps) => {
 								<RemoveRedEyeIcon />
 							</IconButton>
 							<Typography className="view-cnt">{property?.propertyViews}</Typography>
-							<IconButton color={'default'}>
+							<IconButton color={'default'} onClick={() => likePropertyHanler(user, property?._id)}>
 								{property?.meLiked && property?.meLiked[0]?.myFavorite ? (
 									<FavoriteIcon style={{ color: 'red' }} />
 								) : (

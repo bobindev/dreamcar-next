@@ -29,7 +29,7 @@ const TrendProperties = (props: TrendPropertiesProps) => {
 		refetch: getPropertiesRefetch,
 	} = useQuery(GET_PROPERTIES, {
     fetchPolicy: 'cache-and-network',
-    variables: { input: initialInput},
+    variables: {input: initialInput},
     notifyOnNetworkStatusChange: true,
     onCompleted: (data: T) => {
       setTrendProperties(data?.getProperties?.list);
@@ -38,7 +38,7 @@ const TrendProperties = (props: TrendPropertiesProps) => {
 
 	/** HANDLERS **/
 
-	if (trendProperties) console.log('trendProperties: ', trendProperties);
+	if (trendProperties) console.log('trendProperties +++: ', trendProperties);
 	if (!trendProperties) return null;
 
 	if (device === 'mobile') {

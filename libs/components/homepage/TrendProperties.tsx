@@ -58,7 +58,7 @@ const TrendProperties = (props: TrendPropertiesProps) => {
       console.log("Error, likePropertyHanler:", err.message);
       sweetMixinErrorAlert(err.message).then();
     }
-  }
+  };
 
 	if (trendProperties) console.log('trendProperties +++: ', trendProperties);
 	if (!trendProperties) return null;

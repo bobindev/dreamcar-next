@@ -13,10 +13,11 @@ import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 
 interface PropertyBigCardProps {
 	property: Property;
+  likePropertyHanler?: any;
 }
 
 const PropertyBigCard = (props: PropertyBigCardProps) => {
-	const { property } = props;
+	const { property, likePropertyHanler } = props;
 	const device = useDeviceDetect();
 	const user = useReactiveVar(userVar);
 	const router = useRouter();
@@ -77,6 +78,7 @@ const PropertyBigCard = (props: PropertyBigCardProps) => {
 								color={'default'}
 								onClick={(e) => {
 									e.stopPropagation();
+                  likePropertyHanler(user, property?._id);
 								}}
 							>
 								{property?.meLiked && property?.meLiked[0]?.myFavorite ? (

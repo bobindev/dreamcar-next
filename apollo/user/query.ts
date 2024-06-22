@@ -401,7 +401,7 @@ export const GET_BOARD_ARTICLE = gql`
 				updatedAt
 			}
 			meLiked {
-				memberId
+				memberId 
 				likeRefId
 				myFavorite
 			}

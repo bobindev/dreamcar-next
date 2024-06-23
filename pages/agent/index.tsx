@@ -1,4 +1,4 @@
-import React, { ChangeEvent, MouseEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, MouseEvent, useCallback, useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
@@ -9,6 +9,12 @@ import AgentCard from '../../libs/components/common/AgentCard';
 import { useRouter } from 'next/router';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 import { Member } from '../../libs/types/member/member';
+import { useMutation, useQuery } from '@apollo/client';
+import { GET_AGENTS } from '../../apollo/user/query';
+import { T } from '../../libs/types/common';
+import { LIKE_TARGET_MEMBER } from '../../apollo/user/mutation';
+import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../libs/sweetAlert';
+import {Messages} from '../../libs/config'
 
 export const getStaticProps = async ({ locale }: any) => ({
 	props: {
@@ -32,8 +38,26 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 	const [searchText, setSearchText] = useState<string>('');
 
 	/** APOLLO REQUESTS **/
+  const [likeTargetMember] = useMutation(LIKE_TARGET_MEMBER);
+
+  const {
+		loading: getAgentsLoading,
+		data: getAgentsData,
+		error: getAgentsError,
+		refetch: getAgentsRefetch,
+	} = useQuery(GET_AGENTS, {
+    fetchPolicy: 'network-only',
+    variables: {input: searchFilter},
+    notifyOnNetworkStatusChange: true,
+    onCompleted: (data: T) => {
+      setAgents(data?.getAgents?.list);
+      setTotal(data?.getAgents?.metaCounter[0]?.total);
+    },
+  });
+
 	/** LIFECYCLES **/
 	useEffect(() => {
+    
 		if (router.query.input) {
 			const input_obj = JSON.parse(router?.query?.input as string);
 			setSearchFilter(input_obj);
@@ -42,6 +66,13 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 
 		setCurrentPage(searchFilter.page === undefined ? 1 : searchFilter.page);
 	}, [router]);
+
+  useEffect(() => {
+    //BACKEND REFETCH
+    console.log('searchFilter', searchFilter);
+
+    //getPropertiesRefetch({input: searchFilter}).then();
+  }, [searchFilter]);
 
 	/** HANDLERS **/
 	const sortingClickHandler = (e: MouseEvent<HTMLElement>) => {
@@ -85,6 +116,24 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 		setCurrentPage(value);
 	};
 
+  const likeMemberHanler = async (user: any, id: string) => {
+    try {
+      if(!id) return;
+      if(!user._id) throw new Error(Messages.error2);
+      //execute likeTargetProperty Mutation
+      await likeTargetMember({ variables: {input: id}});
+      //execute getPropertiesRefetch
+      await getAgentsRefetch({
+        input: searchFilter
+      });
+
+      await sweetTopSmallSuccessAlert("success", 800);
+    } catch (err: any) {
+      console.log("Error, likeAgentHanler:", err.message);
+      sweetMixinErrorAlert(err.message).then();
+    }
+  };
+
 	if (device === 'mobile') {
 		return <h1>AGENTS PAGE MOBILE</h1>;
 	} else {
@@ -106,6 +155,7 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 										});
 									}
 								}}
+                
 							/>
 						</Box>
 						<Box component={'div'} className={'right'}>
@@ -139,7 +189,7 @@ const AgentList: NextPage = ({ initialInput, ...props }: any) => {
 							</div>
 						) : (
 							agents.map((agent: Member) => {
-								return <AgentCard agent={agent} key={agent._id} />;
+								return <AgentCard agent={agent} key={agent._id} likeMemberHanler={likeMemberHanler} />;
 							})
 						)}
 					</Stack>

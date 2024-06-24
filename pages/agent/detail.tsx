@@ -83,10 +83,10 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
   });
 
   const {
-		loading: getPropertyLoading,
-		data: getPropertyData,
-		error: getPropertyError,
-		refetch: getPropertyRefetch,
+		loading: getPropertiesLoading,
+		data: getPropertiesData,
+		error: getPropertiesError,
+		refetch: getPropertiesRefetch,
 	} = useQuery(GET_PROPERTIES, {
     fetchPolicy: 'network-only',
     variables: {input: searchFilter},
@@ -104,8 +104,8 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
 		error: getCommentsError,
 		refetch: getCommentsRefetch,
 	} = useQuery(GET_COMMENTS, {
-    fetchPolicy: 'cache-and-network',
-    variables: {input: initialComment},
+    fetchPolicy: 'network-only',
+    variables: {input: commentInquiry},
     skip: !commentInquiry.search.commentRefId,
     notifyOnNetworkStatusChange: true,
     onCompleted: (data: T) => {
@@ -121,7 +121,7 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
 
 	useEffect(() => {
     if(searchFilter.search.memberId) {
-      getPropertyRefetch({variables: {input: searchFilter}}).then();
+      getPropertiesRefetch({variables: {input: searchFilter}}).then();
     }
   }, [searchFilter]);
 	useEffect(() => {
@@ -168,7 +168,7 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
       if(!id) return;
       if(!user._id) throw new Error(Messages.error2);
       await likeTargetProperty({ variables: {input: id}});
-      await getPropertyRefetch({
+      await getPropertiesRefetch({
         input: searchFilter
       });
 

@@ -133,7 +133,7 @@ const PropertyDetail: NextPage = ({ initialComment, ...props }: any) => {
 			});
 		}
 	}, [router]);
-
+ 
 	useEffect(() => {
     if(commentInquiry.search.commentRefId) {
       getCommentsRefetch({input: commentInquiry})

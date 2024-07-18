@@ -53,7 +53,7 @@ const withLayoutMain = (Component: any) => {
 			return (
 				<>
 					<Head>
-						<title>Nestar</title>
+						<title>Dreamcar</title>
 						<meta name={'title'} content={`Nestar`} />
 					</Head>
 					<Stack id="pc-wrap">
@@ -62,7 +62,8 @@ const withLayoutMain = (Component: any) => {
 						</Stack>
 
 						<Stack className={'header-main'}>
-							<FiberContainer />
+							{/* <FiberContainer /> */}
+              <Stack className={'head-title'}>FIND YOUR DREAM CAR</Stack>
 							<Stack className={'container'}>
 								<HeaderFilter />
 							</Stack>

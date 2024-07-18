@@ -1,15 +1,17 @@
-import { PropertyLocation, PropertyStatus, PropertyType } from '../../enums/property.enum';
+import { PropertyFuel, PropertyLocation, PropertyMaker, PropertyStatus, PropertyType } from '../../enums/property.enum';
 import { Direction } from '../../enums/common.enum';
 
 export interface PropertyInput {
 	propertyType: PropertyType;
+  propertyMaker: PropertyMaker;
 	propertyLocation: PropertyLocation;
 	propertyAddress: string;
-	propertyTitle: string;
+	propertyModel: string;
+  propertyYear: number;
 	propertyPrice: number;
-	propertySquare: number;
-	propertyBeds: number;
-	propertyRooms: number;
+	propertyMileage: number;
+	propertyFuel: PropertyFuel;
+	propertyColor: string;
 	propertyImages: string[];
 	propertyDesc?: string;
 	propertyBarter?: boolean;
@@ -20,14 +22,15 @@ export interface PropertyInput {
 
 interface PISearch {
 	memberId?: string;
+  makeList?: PropertyMaker[];
 	locationList?: PropertyLocation[];
 	typeList?: PropertyType[];
-	roomsList?: Number[];
+	colorList?: string[];
 	options?: string[];
-	bedsList?: Number[];
+	fuelList?: string[];
 	pricesRange?: Range;
 	periodsRange?: PeriodsRange;
-	squaresRange?: Range;
+	mileageRange: MileageRange;
 	text?: string;
 }
 
@@ -72,4 +75,9 @@ interface Range {
 interface PeriodsRange {
 	start: Date | number;
 	end: Date | number;
+}
+
+interface MileageRange {
+  start: number;
+	end: number;
 }

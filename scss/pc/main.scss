@@ -1,4 +1,4 @@
- /** IMPORTS **/
+/** IMPORTS **/
 @import '/scss/variables.scss';
 @import '/scss/pc/general.scss';
 
@@ -64,11 +64,14 @@ body::-webkit-scrollbar {
 					flex-direction: row;
 					align-items: center;
 					justify-content: space-between;
-					.logo-box {
-						img {
-							width: 150px;
-							cursor: pointer;
-						}
+					.main-title {
+						color: #ffffff;
+						font-family: $font;
+						font-size: 36px;
+						font-style: normal;
+						font-weight: 600;
+						line-height: normal;
+						text-transform: uppercase;
 					}
 					.router-box {
 						position: relative;
@@ -175,11 +178,24 @@ body::-webkit-scrollbar {
 		position: relative;
 		width: 100%;
 		height: 860px;
-		background-image: url('/img/banner/header1.svg');
+		background-image: url('/img/banner/mainbg.jpg');
 		background-size: cover;
+		.head-title {
+			position: relative;
+			margin-top: 316px;
+			flex-direction: column;
+			align-items: center;
+			color: #fff;
+			text-align: center;
+			font-family: $font;
+			font-size: 50px;
+			font-style: normal;
+			font-weight: 600;
+			line-height: 20px; /* 100% */
+		}
 		.container {
 			position: relative;
-			margin-top: 20px;
+			margin-top: 5px;
 			flex-direction: column;
 			align-items: center;
 			.search-box {
@@ -585,7 +601,7 @@ body::-webkit-scrollbar {
 					width: 100%;
 					display: flex;
 					flex-direction: column;
-					.welcome{
+					.welcome {
 						margin-left: 10px;
 						padding: 9px;
 						width: auto;
@@ -595,7 +611,7 @@ body::-webkit-scrollbar {
 						border-radius: 20px 20px 20px 0px;
 						color: #fff;
 					}
-          .msg-left {
+					.msg-left {
 						margin-left: 10px;
 						padding: 9px;
 						width: auto;

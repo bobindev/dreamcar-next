@@ -59,7 +59,7 @@ export const PropertyCard = (props: PropertyCardProps) => {
 					<img src={`${process.env.REACT_APP_API_URL}/${property.propertyImages[0]}`} alt="" />
 				</Stack>
 				<Stack className="information-box" onClick={() => pushPropertyDetail(property?._id)}>
-					<Typography className="name">{property.propertyTitle}</Typography>
+					<Typography className="name">{property.propertyModel}</Typography>
 					<Typography className="address">{property.propertyAddress}</Typography>
 					<Typography className="price">
 						<strong>${formatterStr(property?.propertyPrice)}</strong>

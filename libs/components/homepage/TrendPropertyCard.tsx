@@ -39,20 +39,20 @@ const pushDetailHandler = async (propertyId: string) => {
 					<div>${property.propertyPrice}</div>
 				</Box>
 				<Box component={'div'} className={'info'}>
-					<strong className={'title'} onClick={() => pushDetailHandler(property._id)}>{property.propertyTitle}</strong>
-					<p className={'desc'}>{property.propertyDesc ?? 'no description'}</p>
+					<strong className={'title'} onClick={() => pushDetailHandler(property._id)}>{property.propertyModel}</strong>
+					<p className={'desc'}>{property.propertyDesc ?? 'no description'} </p>
 					<div className={'options'}>
 						<div>
 							<img src="/img/icons/bed.svg" alt="" />
-							<span>{property.propertyBeds} bed</span>
+							<span>{property.propertyFuel} Fuel</span>
 						</div>
 						<div>
 							<img src="/img/icons/room.svg" alt="" />
-							<span>{property.propertyRooms} rooms</span>
+							<span>{property.propertyColor} Color</span>
 						</div>
 						<div>
 							<img src="/img/icons/expand.svg" alt="" />
-							<span>{property.propertySquare} m2</span>
+							<span>{property.propertyMileage} km</span>
 						</div>
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />
@@ -91,20 +91,20 @@ const pushDetailHandler = async (propertyId: string) => {
 					<div>${property.propertyPrice}</div>
 				</Box>
 				<Box component={'div'} className={'info'}>
-					<strong className={'title'} onClick={() => pushDetailHandler(property._id)}>{property.propertyTitle}</strong>
+					<strong className={'title'} onClick={() => pushDetailHandler(property._id)}>{property.propertyModel}</strong>
 					<p className={'desc'}>{property.propertyDesc ?? 'no description'}</p>
 					<div className={'options'}>
 						<div>
 							<img src="/img/icons/bed.svg" alt="" />
-							<span>{property.propertyBeds} bed</span>
+							<span>{property.propertyFuel} Fuel</span>
 						</div>
 						<div>
 							<img src="/img/icons/room.svg" alt="" />
-							<span>{property.propertyRooms} rooms</span>
+							<span>{property.propertyColor} Color</span>
 						</div>
 						<div>
 							<img src="/img/icons/expand.svg" alt="" />
-							<span>{property.propertySquare} m2</span>
+							<span>{property.propertyMileage} km</span>
 						</div>
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />

@@ -64,7 +64,7 @@ const AgentDetail: NextPage = ({ initialInput, initialComment, ...props }: any) 
     onCompleted: (data: T) => {
       setAgent(data?.getMember);
       setSearchFilter({
-        ...searchFilter,
+        ...searchFilter, 
         search: {
           memberId: data?.getMember?._id,
         }

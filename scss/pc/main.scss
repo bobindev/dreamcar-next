@@ -88,6 +88,12 @@ body::-webkit-scrollbar {
 							font-weight: 600;
 							line-height: normal;
 							cursor: pointer;
+							&:hover {
+								text-decoration: underline;
+								text-decoration-color: rgb(237, 236, 235);
+								text-decoration-thickness: 2px;
+								text-underline-offset: 5px;
+							}
 							.community_menu {
 								position: absolute;
 								left: -177%;
@@ -239,8 +245,6 @@ body::-webkit-scrollbar {
 							font-weight: 400;
 							line-height: 26px;
 						}
-						svg {
-						}
 					}
 				}
 				.search-box-other {
@@ -336,9 +340,9 @@ body::-webkit-scrollbar {
 				}
 				.filter-type {
 					position: absolute;
-					padding: 50px;
+					padding: 40px;
 					width: 1094px;
-					min-height: 120px;
+					min-height: 100px;
 					height: auto;
 					top: 96px;
 					right: 0px;
@@ -359,21 +363,20 @@ body::-webkit-scrollbar {
 					div {
 						position: relative;
 						width: 272px;
-						height: 168px;
+						height: 10px;
 						border-radius: 15px;
 						cursor: pointer;
 						background-size: cover;
 						span {
 							position: absolute;
-							top: 13px;
 							right: 12px;
 							padding: 1px 5px 5px 5px;
 							border-radius: 2px 2px 0px 0px;
 							font-family: $font;
 							font-size: 20px;
 							font-style: normal;
-							font-weight: 700;
-							line-height: 26px;
+							font-weight: 500;
+							line-height: 16px;
 							background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0) 100%);
 							// -webkit-background-clip: text;
 							// -webkit-text-fill-color: transparent;
@@ -385,13 +388,13 @@ body::-webkit-scrollbar {
 					position: absolute;
 					padding: 10px 92px;
 					width: 1094px;
-					min-height: 120px;
+					min-height: 100px;
 					height: auto;
 					top: 96px;
 					right: 0px;
 					display: flex;
 					flex-direction: row;
-					justify-content: space-between;
+					justify-content: center;
 					align-items: center;
 					visibility: hidden;
 					border-radius: 12px;
@@ -408,13 +411,13 @@ body::-webkit-scrollbar {
 						display: flex;
 						align-items: center;
 						padding: 10px 30px;
-						border: 1px solid #fffdfd;
+						//border: 1px solid #fffdfd;
 						color: #181a20;
 						font-family: $font;
-						font-size: 20px;
+						font-size: 18px;
 						font-style: normal;
 						font-weight: 400;
-						line-height: 26px;
+						line-height: 20px;
 						cursor: pointer;
 						&:hover {
 							border-radius: 5px;
@@ -682,18 +685,188 @@ body::-webkit-scrollbar {
 			width: 1300px;
 			height: auto;
 			margin: 0 auto;
+			.footer-top {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+
+				.footer-box {
+					margin-top: 15px;
+					div {
+						color: #f7f7f7;
+						font-family: $font;
+						font-size: 30px;
+						font-weight: 600;
+						line-height: 30px;
+					}
+					strong {
+						color: #fff;
+						font-family: $font;
+						font-size: 15px;
+						font-style: normal;
+						font-weight: 400;
+						line-height: normal;
+						text-transform: capitalize;
+					}
+				}
+				.top {
+					display: flex;
+					flex-direction: column;
+					margin-bottom: 10px;
+					padding-bottom: 10px;
+					strong {
+						color: #fff;
+						font-family: $font;
+						font-size: 15px;
+						font-style: normal;
+						font-weight: 600;
+						line-height: normal;
+						text-transform: capitalize;
+					}
+					div {
+						padding: 20px 30px;
+						margin-top: 20px;
+						width: 667px;
+						height: 70px;
+						display: flex;
+						flex-direction: row;
+						align-items: center;
+						box-sizing: border-box;
+						border-radius: 12px;
+						background: #212329;
+						input {
+							margin-right: 10px;
+							width: 85%;
+							border: none;
+							outline: none;
+							color: #fff;
+							font-family: $font;
+							font-size: 14px;
+							font-style: normal;
+							font-weight: 400;
+							line-height: 26px;
+							background: none;
+						}
+						.bottom {
+							box-sizing: border-box;
+							border-radius: 12px;
+							border: 1px solid #fff;
+							span {
+								padding: 15px;
+								color: #fff;
+								font-family: $font;
+								font-size: 15px;
+								font-style: normal;
+								font-weight: 600;
+								line-height: normal;
+								cursor: pointer;
+							}
+						}
+					}
+				}
+			}
 			.main {
 				display: flex;
 				flex-direction: row;
 				justify-content: space-between;
-				.left {
+				.right {
 					height: 360px;
 					display: flex;
 					flex-direction: column;
 					justify-content: space-between;
+          margin-top: 20px;
 					.footer-box {
 						display: flex;
+						flex-direction: row;
+						justify-content: space-between;
+						align-items: center;
+						width: 198.8px;
+						height: 80px;
+						border: 1px solid #fff;
+						border-radius: 16px;
+						background: rgba(255, 255, 255, 0.07);
+						padding: 20px;
+						gap: 10px;
+						.icon {
+              .media-box {
+                margin-top: 12px;
+                color: #929495;
+                svg {
+                  font-size: 32px;
+                  margin-right: 22px;
+                  cursor: pointer;
+                }
+              }
+						}
+						.content {
+							span {
+								color: #bebdbd;
+								font-family: $font;
+								font-size: 14px;
+								font-style: normal;
+								font-weight: 400;
+								//text-transform: capitalize;
+							}
+							p {
+								color: #fff;
+								font-family: $font;
+								font-size: 15px;
+								font-style: normal;
+								font-weight: 600;
+								line-height: normal;
+								text-transform: capitalize;
+							}
+						}
+						
+						span {
+							color: #bebdbd;
+							font-family: $font;
+							font-size: 14px;
+							font-style: normal;
+							font-weight: 400;
+							//text-transform: capitalize;
+						}
+						p {
+							color: #fff;
+							font-family: $font;
+							font-size: 15px;
+							font-style: normal;
+							font-weight: 600;
+							line-height: normal;
+							text-transform: capitalize;
+						}
+						.media-box {
+							margin-top: 12px;
+							color: #929495;
+							svg {
+								font-size: 32px;
+								margin-right: 22px;
+								cursor: pointer;
+							}
+						}
+					}
+					.footer-box1 {
+						display: flex;
 						flex-direction: column;
+						.content {
+							span {
+								color: #bebdbd;
+								font-family: $font;
+								font-size: 14px;
+								font-style: normal;
+								font-weight: 400;
+								text-transform: capitalize;
+							}
+							p {
+								color: #fff;
+								font-family: $font;
+								font-size: 15px;
+								font-style: normal;
+								font-weight: 600;
+								line-height: normal;
+								text-transform: capitalize;
+							}
+						}
 						.logo {
 							width: 128px;
 							height: 52px;
@@ -727,56 +900,12 @@ body::-webkit-scrollbar {
 						}
 					}
 				}
-				.right {
+				.left {
 					display: flex;
-					flex-direction: column;
-					.top {
-						display: flex;
-						flex-direction: column;
-						strong {
-							color: #fff;
-							font-family: $font;
-							font-size: 15px;
-							font-style: normal;
-							font-weight: 600;
-							line-height: normal;
-							text-transform: capitalize;
-						}
-						div {
-							padding: 20px 30px;
-							margin-top: 20px;
-							width: 667px;
-							height: 70px;
-							display: flex;
-							flex-direction: row;
-							align-items: center;
-							box-sizing: border-box;
-							border-radius: 12px;
-							background: #212329;
-							input {
-								margin-right: 10px;
-								width: 85%;
-								border: none;
-								outline: none;
-								color: #fff;
-								font-family: $font;
-								font-size: 14px;
-								font-style: normal;
-								font-weight: 400;
-								line-height: 26px;
-								background: none;
-							}
-							span {
-								color: #fff;
-								font-family: $font;
-								font-size: 15px;
-								font-style: normal;
-								font-weight: 600;
-								line-height: normal;
-								cursor: pointer;
-							}
-						}
-					}
+					flex-direction: row;
+					justify-content: space-between;
+					width: 75%;
+					height: auto;
 					.bottom {
 						margin-top: 60px;
 						display: flex;

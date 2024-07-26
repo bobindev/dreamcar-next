@@ -29,33 +29,33 @@ const withLayoutBasic = (Component: any) => {
 
 			switch (router.pathname) {
 				case '/property':
-					title = 'Property Search';
+					title = 'Make a Perfect Search';
 					desc = 'We are glad to see you again!';
-					bgImage = '/img/banner/properties.png';
+					bgImage = '/img/banner/collection.jpg';
 					break;
 				case '/agent':
 					title = 'Agents';
-					desc = 'Home / For Rent';
-					bgImage = '/img/banner/agents.webp';
+					desc = 'Car / For Rent';
+					bgImage = '/img/banner/bgcollection.jpg';
 					break;
 				case '/agent/detail':
 					title = 'Agent Page';
-					desc = 'Home / For Rent';
-					bgImage = '/img/banner/header2.svg';
+					desc = 'Car / For Rent';
+					bgImage = '/img/banner/dealer.jpg';
 					break;
 				case '/mypage':
 					title = 'my page';
-					desc = 'Home / For Rent';
-					bgImage = '/img/banner/header1.svg';
+					desc = 'Car / For Rent';
+					bgImage = '/img/banner/mycar.webp';
 					break;
 				case '/community':
 					title = 'Community';
-					desc = 'Home / For Rent';
-					bgImage = '/img/banner/header2.svg';
+					desc = 'Car / For Rent';
+					bgImage = '/img/banner/comunity.jpg';
 					break;
 				case '/community/detail':
 					title = 'Community Detail';
-					desc = 'Home / For Rent';
+					desc = 'Car / For Rent';
 					bgImage = '/img/banner/header2.svg';
 					break;
 				case '/cs':
@@ -131,8 +131,10 @@ const withLayoutBasic = (Component: any) => {
 								boxShadow: 'inset 10px 40px 150px 40px rgb(24 22 36)',
 							}}
 						>
-							<Stack className={'container'}>
-								<strong>{t(memoizedValues.title)}</strong>
+							<Stack className={'container'}
+              
+              >
+								<strong >{t(memoizedValues.title)}</strong>
 								<span>{t(memoizedValues.desc)}</span>
 							</Stack>
 						</Stack>

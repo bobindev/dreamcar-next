@@ -1,4 +1,4 @@
-import { PropertyFuel, PropertyLocation, PropertyMaker, PropertyStatus, PropertyType } from '../../enums/property.enum';
+import { PropertyColor, PropertyFuel, PropertyLocation, PropertyMaker, PropertyStatus, PropertyType } from '../../enums/property.enum';
 import { Direction } from '../../enums/common.enum';
 
 export interface PropertyInput {
@@ -11,7 +11,7 @@ export interface PropertyInput {
 	propertyPrice: number;
 	propertyMileage: number;
 	propertyFuel: PropertyFuel;
-	propertyColor: string;
+	propertyColor: PropertyColor;
 	propertyImages: string[];
 	propertyDesc?: string;
 	propertyBarter?: boolean;
@@ -25,9 +25,9 @@ interface PISearch {
   makeList?: PropertyMaker[];
 	locationList?: PropertyLocation[];
 	typeList?: PropertyType[];
-	colorList?: string[];
+	colorList?: PropertyColor[];
 	options?: string[];
-	fuelList?: string[];
+	fuelList?: PropertyFuel[];
 	pricesRange?: Range;
 	periodsRange?: PeriodsRange;
 	mileageRange: MileageRange;

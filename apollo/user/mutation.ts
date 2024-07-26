@@ -226,21 +226,23 @@ export const LIKE_TARGET_PROPERTY = gql`
  *************************/
 
 export const CREATE_BOARD_ARTICLE = gql`
-	mutation CreateBoardArticle($input: BoardArticleInput!) {
-		createBoardArticle(input: $input) {
-			_id
-			articleCategory
-			articleStatus
-			articleTitle
-			articleContent
-			articleImage
-			articleViews
-			articleLikes
-			memberId
-			createdAt
-			updatedAt
-		}
-	}
+    mutation CreateBoardArticle ($input: BoardArticleInput!) {
+    createBoardArticle(input: $input) {
+        _id
+        articleCategory
+        articleStatus
+        articleTitle
+        articleContent
+        articleImage
+        articleViews
+        articleLikes
+        articleComments
+        memberId
+        createdAt
+        updatedAt
+    }
+}
+
 `;
 
 export const UPDATE_BOARD_ARTICLE = gql`

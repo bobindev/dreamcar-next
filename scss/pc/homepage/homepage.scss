@@ -89,7 +89,7 @@
 					flex-direction: row;
 					button {
 						border-radius: 6px;
-						background: rgba(255, 255, 255, 0.07);
+						background: rgba(187, 141, 141, 0.07);
 						color: #ffffff;
 						font-family: $font;
 						font-size: 14px;
@@ -120,6 +120,7 @@
 			height: 697px;
 			display: flex;
 			flex-direction: row;
+			background: #eef1fb;
 			.container {
 				flex-direction: column;
 				.card-box {
@@ -153,6 +154,8 @@
 						display: flex;
 						flex-direction: column;
 						transition: transform 0.3s;
+						background: #ffffff;
+						border-radius: 12px;
 						&:hover {
 							opacity: 1;
 							transform: scale(1.05);
@@ -163,6 +166,7 @@
 							height: 203px;
 							background-size: cover;
 							border-radius: 12px 12px 0px 0px;
+
 							cursor: pointer;
 							div {
 								position: absolute;
@@ -651,7 +655,7 @@
 			height: 722px;
 			display: flex;
 			flex-direction: row;
-			background: #f6f6f6;
+			background: #eef1fb;
 			.container {
 				position: relative;
 				flex-direction: column;
@@ -670,7 +674,7 @@
 						align-items: center;
 						justify-content: center;
 						border-radius: 50%;
-						background: #ffffff;
+						background: #fff;
 						filter: drop-shadow(0px 10px 35px rgba(5, 16, 54, 0.1));
 						cursor: pointer;
 						svg {
@@ -705,12 +709,15 @@
 							img {
 								width: 209px;
 								height: 209px;
-								border-radius: 50%;
+								border-radius: 12px;
 								cursor: pointer;
 								object-fit: cover;
 							}
 							strong {
-								margin-top: 20px;
+								position: relative;
+								display: flex;
+								left: 15px;
+								margin-top: 10px;
 								color: #181a20;
 								text-align: center;
 								font-family: $font;
@@ -722,6 +729,9 @@
 								cursor: pointer;
 							}
 							span {
+								position: relative;
+								display: flex;
+								left: 15px;
 								color: #181a20;
 								text-align: center;
 								font-family: $font;
@@ -736,93 +746,105 @@
 			}
 		}
 		.events {
-			position: relative;
-			padding: 100px 0px 92px;
-			width: 100%;
-			height: 810px;
 			display: flex;
-			flex-direction: row;
-			background: #181a20;
-			.container {
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			width: 100%;
+			height: 722px;
+			background-color: #f5f5f5;
+			.event-title {
+				display: flex;
+				width: 333.96px;
+				height: 40px;
 				flex-direction: column;
 				align-items: center;
-				.card-wrapper {
-					position: relative;
-					margin-top: 48px;
-					width: 100%;
-					height: auto;
-					display: flex;
-					flex-direction: row;
-					justify-content: space-between;
-					.event-card {
-						position: relative;
-						width: 300px;
-						height: 420px;
-						border-radius: 12px;
-						opacity: 0.9;
-						cursor: pointer;
-						transition: opacity 0.4s;
-						&:hover {
-							opacity: 1;
-							scale: 1.05;
-							transition: 0.3s;
-							.more {
-								opacity: 1;
-							}
-						}
-						.info {
-							position: absolute;
-							display: flex;
-							flex-direction: column;
-							top: 35px;
-							left: 10px;
-							right: 10px;
-							strong {
-								color: #f64747;
-								font-family: $font;
-								font-size: 25px;
-								font-style: normal;
-								font-weight: 600;
-								line-height: normal;
-								text-transform: capitalize;
-							}
-							span {
-								color: #f66767;
-								font-family: $font;
-								font-size: 20px;
-								font-style: normal;
-								font-weight: 500;
-								line-height: 28px;
-								text-transform: capitalize;
-							}
-						}
-						.more {
-							position: absolute;
-							left: 10px;
-							right: 10px;
-							bottom: 41px;
-							display: flex;
-							flex-direction: row;
-							align-items: center;
-							opacity: 0;
-							span {
-								padding: 0px 5px;
-								border-radius: 5px;
-								background: #fffdfdc4;
-								color: #9c67f6;
-								font-family: $font;
-								font-size: 16px;
-								font-style: normal;
-								font-weight: 400;
-								line-height: 26px;
-								text-align: justify;
-								cursor: pointer;
-							}
-						}
+				color: #050b20;
+				font-family: 'DM Sans';
+				font-size: 30px;
+				font-style: normal;
+				font-weight: 500;
+				margin-bottom: 30px;
+			}
+			.navbar {
+				display: flex;
+				flex-direction: row;
+				justify-content: space-around;
+				width: 80%;
+				background-color: white;
+				padding: 10px;
+				box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
+				span {
+					cursor: pointer;
+					padding: 10px;
+					transition: color 0.3s;
+
+					&.active {
+						color: #00f;
+						border-bottom: 2px solid #00f;
+					}
+
+					&:hover {
+						color: #00f;
 					}
 				}
 			}
+
+			.container {
+				display: flex;
+				position: relative;
+				width: 80%;
+				margin-top: 20px;
+
+				.left {
+					flex: 1;
+					position: absolute;
+					top: 50px;
+					left: 50px;
+					background: rgba(0, 0, 255, 0.7);
+					color: white;
+					padding: 20px;
+					border-radius: 10px;
+
+					h2 {
+						margin: 0;
+						padding: 0;
+						font-size: 24px;
+					}
+
+					h3 {
+						margin: 10px 0;
+						font-size: 18px;
+					}
+
+					button {
+						margin-top: 10px;
+					}
+				}
+
+				.right {
+					flex: 1;
+					display: flex;
+					justify-content: flex-end;
+
+					img {
+						border-radius: 10px;
+					}
+				}
+			}
+
+			.cardWrapper {
+				position: relative;
+				margin-top: 18px;
+				width: 100%;
+				height: auto;
+				display: flex;
+				flex-direction: row;
+				justify-content: space-between;
+			}
 		}
+
 		.community-board {
 			position: relative;
 			padding: 124px 0px 61px;
@@ -830,6 +852,7 @@
 			height: 860px;
 			display: flex;
 			flex-direction: row;
+			background: #eef1fb;
 			.container {
 				flex-direction: column;
 				align-items: center;
@@ -966,6 +989,71 @@
 								}
 							}
 						}
+					}
+				}
+			}
+		}
+
+		.product-link {
+			position: relative;
+			padding: 153px 0px 135px;
+			width: 100%;
+			height: 722px;
+			display: flex;
+			flex-direction: row;
+			background: #eef1fb;
+			background-image: url('/img/banner/findcar.jpg'); // Replace with the correct path to your image
+			background-size: cover;
+			background-position: center;
+			align-items: center;
+			justify-content: center;
+			color: white;
+			.container {
+				position: relative;
+				display: flex;
+				flex-direction: column;
+        justify-content: center;
+				.box-title {
+					//display: flex;
+					width: 600px;
+					height: 210px;
+					flex-direction: row;
+					justify-content: center;
+					align-items: center;
+					color: #fff;
+					font-family: $font;
+					font-size: 70px;
+					font-style: normal;
+					font-weight: 500;
+					line-height: 100%; /* 150% */
+					text-transform: capitalize;
+				}
+				.box-link {
+					display: flex;
+					width: 296.48px;
+					height: 63.22px;
+					padding: 10px;
+          margin-top: 10px;
+					color: #eb6753;
+					justify-content: center;
+					align-items: center;
+					gap: 9.489px;
+					border-radius: 12px;
+					border: 1px solid #fff;
+					span {
+						color: #fff;
+						font-family: $font;
+						font-size: 20px;
+						font-style: normal;
+						font-weight: 500;
+						line-height: 18px; /* 150% */
+						text-transform: capitalize;
+					}
+					img {
+						margin-left: 10px;
+						width: 16px;
+						height: 16px;
+						color: #eb6753;
 					}
 				}
 			}

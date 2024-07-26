@@ -10,7 +10,7 @@ for (let i = 1970; i <= thisYear; i++) {
 	propertyYears.push(String(i));
 }
 
-export const propertyMileage = [200, 300, 500, 1000, 10000, 500000];
+export const propertyMileage = [1000, 5000, 10000, 20000, 50000, 100000, 200000, 300000, 400000, 500000];
 
 export const Messages = {
 	error1: 'Something went wrong!',

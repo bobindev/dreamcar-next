@@ -149,7 +149,7 @@ export const PropertyPanelList = (props: PropertyPanelListType) => {
 
 						{properties.length !== 0 &&
 							properties.map((property: Property, index: number) => {
-								const propertyImage = `${REACT_APP_API_URL}/${property?.propertyImages[0]}`;
+								const propertyImages = `${REACT_APP_API_URL}/${property?.propertyImages[0]}`;
 
 								return (
 									<TableRow hover key={property?._id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
@@ -158,7 +158,7 @@ export const PropertyPanelList = (props: PropertyPanelListType) => {
                       {property.propertyStatus === PropertyStatus.ACTIVE ? (<Stack direction={'row'}>
 												<Link href={`/property/detail?id=${property?._id}`}>
 													<div>
-														<Avatar alt="Remy Sharp" src={propertyImage} sx={{ ml: '2px', mr: '10px' }} />
+														<Avatar alt="Remy Sharp" src={propertyImages} sx={{ ml: '2px', mr: '10px' }} />
 													</div>
 												</Link>
 												<Link href={`/property/detail?id=${property?._id}`}>
@@ -167,8 +167,9 @@ export const PropertyPanelList = (props: PropertyPanelListType) => {
 											</Stack>) : (
                         <Stack direction={'row'}>
 													<div>
-														<Avatar alt="Remy Sharp" src={propertyImage} sx={{ ml: '2px', mr: '10px' }} />
+														<Avatar alt="Remy Sharp" src={propertyImages} sx={{ ml: '2px', mr: '10px' }} />
 													</div>
+                          
 													<div style={{marginTop: "10px"}}>{property.propertyModel}</div>
 												
 											</Stack>

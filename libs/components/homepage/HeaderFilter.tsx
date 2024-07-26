@@ -7,7 +7,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { propertyMileage, propertyYears } from '../../config';
-import { PropertyLocation, PropertyType } from '../../enums/property.enum';
+import { PropertyColor, PropertyFuel, PropertyLocation, PropertyType } from '../../enums/property.enum';
 import { PropertiesInquiry } from '../../types/property/property.input';
 import { useRouter } from 'next/router';
 import { useTranslation } from 'next-i18next';
@@ -53,6 +53,8 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 	const [openColors, setOpenColors] = useState(false);
 	const [propertyLocation, setPropertyLocation] = useState<PropertyLocation[]>(Object.values(PropertyLocation));
 	const [propertyType, setPropertyType] = useState<PropertyType[]>(Object.values(PropertyType));
+  const [propertyColor, setPropertyColor] = useState<PropertyColor[]>(Object.values(PropertyColor));
+  const [propertyFuel, setPropertyFuel] = useState<PropertyFuel[]>(Object.values(PropertyFuel));
 	const [yearCheck, setYearCheck] = useState({ start: 1970, end: thisYear });
 	const [optionCheck, setOptionCheck] = useState('all');
 
@@ -139,7 +141,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 						typeList: [value],
 					},
 				});
-				colorStateChangeHandler();
+				typeStateChangeHandler();
 			} catch (err: any) {
 				console.log('ERROR, propertyTypeSelectHandler:', err);
 			}
@@ -165,38 +167,37 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 		[searchFilter],
 	);
 
+	// const propertyFuelSelectHandler = useCallback(
+	// 	async (string: String) => {
+	// 		try {
+	// 			if (string != '') {
+	// 				if (searchFilter?.search?.fuelList?.includes('')) {
+	// 					setSearchFilter({
+	// 						...searchFilter,
+	// 						search: {
+	// 							...searchFilter.search,
+	// 							fuelList: searchFilter?.search?.fuelList?.filter((item: String) => item !== string),
+	// 						},
+	// 					});
+	// 				} else {
+	// 					setSearchFilter({
+	// 						...searchFilter,
+	// 						search: { ...searchFilter.search, fuelList: [...(searchFilter?.search?.fuelList || []), ''] },
+	// 					});
+	// 				}
+	// 			} else {
+	// 				delete searchFilter?.search.fuelList;
+	// 				setSearchFilter({ ...searchFilter });
+	// 			}
+
+	// 			console.log('propertyFuelSelectHandler:', '');
+	// 		} catch (err: any) {
+	// 			console.log('ERROR, propertyFuelSelectHandler:', err);
+	// 		}
+	// 	},
+	// 	[searchFilter],
+	// );
 	const propertyFuelSelectHandler = useCallback(
-		async (string: String) => {
-			try {
-				if (string != '') {
-					if (searchFilter?.search?.fuelList?.includes('')) {
-						setSearchFilter({
-							...searchFilter,
-							search: {
-								...searchFilter.search,
-								fuelList: searchFilter?.search?.fuelList?.filter((item: String) => item !== string),
-							},
-						});
-					} else {
-						setSearchFilter({
-							...searchFilter,
-							search: { ...searchFilter.search, fuelList: [...(searchFilter?.search?.fuelList || []), ''] },
-						});
-					}
-				} else {
-					delete searchFilter?.search.fuelList;
-					setSearchFilter({ ...searchFilter });
-				}
-
-				console.log('propertyFuelSelectHandler:', '');
-			} catch (err: any) {
-				console.log('ERROR, propertyFuelSelectHandler:', err);
-			}
-		},
-		[searchFilter],
-	);
-
-	const propertyOptionSelectHandler = useCallback(
 		async (e: any) => {
 			try {
 				const value = e.target.value;
@@ -207,11 +208,11 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 						...searchFilter,
 						search: {
 							...searchFilter.search,
-							options: [value],
+							fuelList: [value],
 						},
 					});
 				} else {
-					delete searchFilter.search.options;
+					delete searchFilter.search.fuelList;
 					setSearchFilter({
 						...searchFilter,
 						search: {
@@ -220,7 +221,37 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 					});
 				}
 			} catch (err: any) {
-				console.log('ERROR, propertyOptionSelectHandler:', err);
+				console.log('ERROR, propertyFuelSelectHandler:', err);
+			}
+		},
+		[searchFilter],
+	);
+
+	const propertyMakerSelectHandler = useCallback(
+		async (e: any) => {
+			try {
+				const value = e.target.value;
+				setOptionCheck(value);
+
+				if (value !== 'all') {
+					setSearchFilter({
+						...searchFilter,
+						search: {
+							...searchFilter.search,
+							makeList: [value],
+						},
+					});
+				} else {
+					delete searchFilter.search.makeList;
+					setSearchFilter({
+						...searchFilter,
+						search: {
+							...searchFilter.search,
+						},
+					});
+				}
+			} catch (err: any) {
+				console.log('ERROR, propertyMakerSelectHandler:', err);
 			}
 		},
 		[searchFilter],
@@ -236,7 +267,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 					search: {
 						...searchFilter.search,
 						// @ts-ignore
-						mileageRange: { ...searchFilter.search.mileageRange, start: parseInt(value) },
+						mileageRange: { ...searchFilter.search.mileageRange, start: value },
 					},
 				});
 			} else {
@@ -245,7 +276,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 					search: {
 						...searchFilter.search,
 						// @ts-ignore
-						mileageRange: { ...searchFilter.search.mileageRange, end: parseInt(value) },
+						mileageRange: { ...searchFilter.search.mileageRange, end: value },
 					},
 				});
 			}
@@ -297,8 +328,8 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 				delete searchFilter.search.colorList;
 			}
 
-			if (searchFilter?.search?.options?.length == 0) {
-				delete searchFilter.search.options;
+			if (searchFilter?.search?.makeList?.length == 0) {
+				delete searchFilter.search.makeList;
 			}
 
 			if (searchFilter?.search?.fuelList?.length == 0) {
@@ -330,9 +361,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 							<ExpandMoreIcon />
 						</Box>
 						<Box className={`box ${openColors ? 'on' : ''}`} onClick={colorStateChangeHandler}>
-							<span>
-								{searchFilter?.search?.colorList ? `${searchFilter?.search?.colorList[0]}` : t('Colors')}
-							</span>
+							<span>{searchFilter?.search?.colorList ? `${searchFilter?.search?.colorList[0]}` : t('Colors')}</span>
 							<ExpandMoreIcon />
 						</Box>
 					</Stack>
@@ -361,11 +390,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 					<div className={`filter-type ${openType ? 'on' : ''}`} ref={typeRef}>
 						{propertyType.map((type: string) => {
 							return (
-								<div
-									style={{ backgroundImage: `url(/img/banner/types/${type.toLowerCase()}.webp)` }}
-									onClick={() => propertyTypeSelectHandler(type)}
-									key={type}
-								>
+								<div onClick={() => propertyTypeSelectHandler(type)} key={type}>
 									<span>{type}</span>
 								</div>
 							);
@@ -373,10 +398,10 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 					</div>
 
 					<div className={`filter-rooms ${openColors ? 'on' : ''}`} ref={colorsRef}>
-          {['White', 'Black', 'Red', 'Blue', 'Grey'].map((color: string) => {
+						{propertyColor.map((color: string) => {
 							return (
 								<span onClick={() => propertyColorSelectHandler(color)} key={color}>
-									{color} 
+									{color}
 								</span>
 							);
 						})}
@@ -397,7 +422,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 								<CloseIcon />
 							</div>
 							<div className={'top'}>
-								<span>Find your home</span>
+								<span>Search your</span>
 								<div className={'search-input-box'}>
 									<img src="/img/icons/search.svg" alt="" />
 									<input
@@ -417,38 +442,41 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 							<div className={'middle'}>
 								<div className={'row-box'}>
 									<div className={'box'}>
-										<span>Fuels </span>
-										<div className={'inside'}>
-											<div
-												className={`room ${!searchFilter?.search?.fuelList ? 'active' : ''}`}
-												onClick={() => propertyFuelSelectHandler('')}
-											>
-												Any
-											</div>
-											{['ELECTRIC', 'GASOLINE', 'HYBRID', 'DIESEL', 'LPG'].map((fuel: string) => (
-												<div
-													className={`room ${searchFilter?.search?.fuelList?.includes(fuel) ? 'active' : ''}`}
-													onClick={() => propertyFuelSelectHandler(fuel)}
-													key={fuel}
-												>
-													{fuel == '' ? 'Any' : fuel}
-												</div>
-											))}
-										</div>
-									</div>
-									<div className={'box'}>
-										<span>options</span>
+										<span>Fuel Type</span>
 										<div className={'inside'}>
 											<FormControl>
 												<Select
 													value={optionCheck}
-													onChange={propertyOptionSelectHandler}
+													onChange={propertyFuelSelectHandler}
 													displayEmpty
 													inputProps={{ 'aria-label': 'Without label' }}
 												>
-													<MenuItem value={'all'}>All Options</MenuItem>
-													<MenuItem value={'propertyBarter'}>Barter</MenuItem>
-													<MenuItem value={'propertyRent'}>Rent</MenuItem>
+													<MenuItem value="any">Any</MenuItem>
+													{propertyFuel.map((fuel) => (
+														<MenuItem value={fuel} key={fuel}>
+															{fuel}
+														</MenuItem>
+													))}
+												</Select>
+											</FormControl>
+										</div>
+									</div>
+									<div className={'box'}>
+										<span>Maker</span>
+										<div className={'inside'}>
+											<FormControl>
+												<Select
+													value={optionCheck}
+													onChange={propertyMakerSelectHandler}
+													displayEmpty
+													inputProps={{ 'aria-label': 'Without label' }}
+												>
+													<MenuItem value="any">Any</MenuItem>
+													{['HYUNDAI', 'KIA', 'GENESIS', 'GM', 'SSANGYONG'].map((make) => (
+														<MenuItem value={make} key={make}>
+															{make}
+														</MenuItem>
+													))}
 												</Select>
 											</FormControl>
 										</div>
@@ -500,7 +528,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 											<FormControl sx={{ width: '122px' }}>
 												<Select
 													value={searchFilter?.search?.mileageRange?.start}
-													onChange={(e: any) => propertyMileageHandler(e, 'start')}
+													onChange={(e) => propertyMileageHandler(e, 'start')}
 													displayEmpty
 													inputProps={{ 'aria-label': 'Without label' }}
 													MenuProps={MenuProps}
@@ -520,7 +548,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 											<FormControl sx={{ width: '122px' }}>
 												<Select
 													value={searchFilter?.search?.mileageRange?.end}
-													onChange={(e: any) => propertyMileageHandler(e, 'end')}
+													onChange={(e) => propertyMileageHandler(e, 'end')}
 													displayEmpty
 													inputProps={{ 'aria-label': 'Without label' }}
 													MenuProps={MenuProps}
@@ -568,7 +596,7 @@ HeaderFilter.defaultProps = {
 		limit: 9,
 		search: {
 			mileageRange: {
-				start: 0,
+				start: 1000,
 				end: 500000,
 			},
 			pricesRange: {

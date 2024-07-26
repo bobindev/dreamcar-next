@@ -1,9 +1,9 @@
-import { PropertyFuel, PropertyLocation, PropertyMaker, PropertyStatus, PropertyType } from '../../enums/property.enum';
+import { PropertyColor, PropertyFuel, PropertyLocation, PropertyMaker, PropertyStatus, PropertyType } from '../../enums/property.enum';
 
 export interface PropertyUpdate {
 	_id: string;
 	propertyType?: PropertyType;
-  propertyMaker: PropertyMaker;
+  propertyMaker?: PropertyMaker;
 	propertyStatus?: PropertyStatus;
 	propertyLocation?: PropertyLocation;
 	propertyAddress?: string;
@@ -12,7 +12,7 @@ export interface PropertyUpdate {
 	propertyPrice?: number;
 	propertyMileage?: number;
 	propertyFuel?: PropertyFuel;
-	propertyColor?: string;
+	propertyColor?: PropertyColor;
 	propertyImages?: string[];
 	propertyDesc?: string;
 	propertyBarter?: boolean;
@@ -21,3 +21,5 @@ export interface PropertyUpdate {
 	deletedAt?: Date;
 	constructedAt?: Date;
 }
+
+// 'White', 'Black', 'Red', 'Blue', 'Orange'

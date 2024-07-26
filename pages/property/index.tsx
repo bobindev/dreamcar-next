@@ -219,12 +219,12 @@ const PropertyList: NextPage = ({ initialInput, ...props }: any) => {
 PropertyList.defaultProps = {
 	initialInput: {
 		page: 1,
-		limit: 3,
+		limit: 9,
 		sort: 'createdAt',
 		direction: 'DESC',
 		search: {
 			mileageRange: {
-				start: 0,
+				start: 1000,
 				end: 500000,
 			},
 			pricesRange: {

@@ -50,15 +50,15 @@ const PopularPropertyCard = (props: PopularPropertyCardProps) => {
 					<p className={'desc'}>{property.propertyAddress}</p>
 					<div className={'options'}>
 						<div>
-							<img src="/img/icons/bed.svg" alt="" />
+							<img src="/img/icons/fuel.svg" alt="" />
 							<span>{property?.propertyFuel} Fuel</span>
 						</div>
 						<div>
-							<img src="/img/icons/room.svg" alt="" />
+							<img src="/img/icons/color.svg" alt="" />
 							<span>{property?.propertyColor} color</span>
 						</div>
 						<div>
-							<img src="/img/icons/expand.svg" alt="" />
+							<img src="/img/icons/mileage.svg" alt="" />
 							<span>{property?.propertyMileage} km</span>
 						</div>
 					</div>
@@ -100,16 +100,16 @@ const PopularPropertyCard = (props: PopularPropertyCardProps) => {
 					<p className={'desc'}>{property.propertyAddress}</p>
 					<div className={'options'}>
 						<div>
-							<img src="/img/icons/bed.svg" alt="" />
+							<img src="/img/icons/fuel.svg" alt="" />
 							<span>{property?.propertyFuel} Fuel</span>
 						</div>
 						<div>
-							<img src="/img/icons/room.svg" alt="" />
+							<img src="/img/icons/color.svg" alt="" />
 							<span>{property?.propertyColor} Color</span>
 						</div>
 						<div>
-							<img src="/img/icons/expand.svg" alt="" />
-							<span>{property?.propertyMileage} m2</span>
+							<img src="/img/icons/mileage.svg" alt="" />
+							<span>{property?.propertyMileage} km</span>
 						</div>
 					</div>
 					<Divider sx={{ mt: '15px', mb: '17px' }} />

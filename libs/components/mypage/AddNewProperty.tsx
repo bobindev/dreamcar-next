@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Button, Stack, Typography } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
-import { PropertyFuel, PropertyLocation, PropertyType } from '../../enums/property.enum';
+import { PropertyColor, PropertyFuel, PropertyLocation, PropertyType } from '../../enums/property.enum';
 import { REACT_APP_API_URL, propertyMileage } from '../../config';
 import { PropertyInput } from '../../types/property/property.input';
 import axios from 'axios';
@@ -21,30 +21,32 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 	const [insertPropertyData, setInsertPropertyData] = useState<PropertyInput>(initialValues);
 	const [propertyType, setPropertyType] = useState<PropertyType[]>(Object.values(PropertyType));
 	const [propertyLocation, setPropertyLocation] = useState<PropertyLocation[]>(Object.values(PropertyLocation));
+  const [propertyColor, setPropertyColor] = useState<PropertyColor[]>(Object.values(PropertyColor));
 	const token = getJwtToken();
 	const user = useReactiveVar(userVar);
 
 	/** APOLLO REQUESTS **/
 
-  const [createProperty] = useMutation(CREATE_PROPERTY);
-  const [updateProperty] = useMutation(UPDATE_PROPERTY);
-  
-  const {
+	const [createProperty] = useMutation(CREATE_PROPERTY);
+	const [updateProperty] = useMutation(UPDATE_PROPERTY);
+
+	const {
 		loading: getPropertyLoading,
 		data: getPropertyData,
 		error: getPropertyError,
 		refetch: getPropertyRefetch,
 	} = useQuery(GET_PROPERTY, {
-    fetchPolicy: 'network-only',
-    variables: {input: router.query.propertyId},
-    },
-  );
+		fetchPolicy: 'network-only',
+		variables: { input: router.query.propertyId },
+	});
 
 	/** LIFECYCLES **/
 	useEffect(() => {
 		setInsertPropertyData({
 			...insertPropertyData,
+			propertyMaker: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyMaker : '',
 			propertyModel: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyModel : '',
+			propertyYear: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyYear : 0,
 			propertyPrice: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyPrice : 0,
 			propertyType: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyType : '',
 			propertyLocation: getPropertyData?.getProperty ? getPropertyData?.getProperty?.propertyLocation : '',
@@ -114,15 +116,18 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 
 	const doDisabledCheck = () => {
 		if (
+			//@ts-ignore
+			insertPropertyData.propertyMaker === '' ||
 			insertPropertyData.propertyModel === '' ||
+			insertPropertyData.propertyYear === 0 ||
 			insertPropertyData.propertyPrice === 0 || // @ts-ignore
 			insertPropertyData.propertyType === '' || // @ts-ignore
 			insertPropertyData.propertyLocation === '' || // @ts-ignore
 			insertPropertyData.propertyAddress === '' || // @ts-ignore
 			insertPropertyData.propertyBarter === '' || // @ts-ignore
-			insertPropertyData.propertyRent === '' ||
+			insertPropertyData.propertyRent === '' || // @ts-ignore
 			insertPropertyData.propertyColor === '' || // @ts-ignore
-			insertPropertyData.propertyFuel === '' || 
+			insertPropertyData.propertyFuel === '' ||
 			insertPropertyData.propertyMileage === 0 ||
 			insertPropertyData.propertyDesc === '' ||
 			insertPropertyData.propertyImages.length === 0
@@ -132,44 +137,44 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 	};
 
 	const insertPropertyHandler = useCallback(async () => {
-    try {
-      const result = await createProperty({
-        variables: {
-          input: insertPropertyData,
-        }
-      });
-      await sweetMixinSuccessAlert("This property has been created successfully.");
-      await router.push({
-        pathname: '/mypage',
-        query: {
-          category: 'myProperties'
-        },
-      });
-    }catch (err: any) {
-      sweetErrorHandling(err).then();
-    }
-  }, [insertPropertyData]);
+		try {
+			const result = await createProperty({
+				variables: {
+					input: insertPropertyData,
+				},
+			});
+			await sweetMixinSuccessAlert('This property has been created successfully.');
+			await router.push({
+				pathname: '/mypage',
+				query: {
+					category: 'myProperties',
+				},
+			});
+		} catch (err: any) {
+			sweetErrorHandling(err).then();
+		}
+	}, [insertPropertyData]);
 
 	const updatePropertyHandler = useCallback(async () => {
-    try {
-      // @ts-ignore
-      insertPropertyData._id =getPropertyData?.getProperty?._id;
-      const result = await updateProperty({
-        variables: {
-          input: insertPropertyData,
-        }
-      });
-      await sweetMixinSuccessAlert("This property has been updated successfully.");
-      await router.push({
-        pathname: '/mypage',
-        query: {
-          category: 'myProperties'
-        },
-      });
-    }catch (err: any) {
-      sweetErrorHandling(err).then();
-    }
-  }, [insertPropertyData]);
+		try {
+			// @ts-ignore
+			insertPropertyData._id = getPropertyData?.getProperty?._id;
+			const result = await updateProperty({
+				variables: {
+					input: insertPropertyData,
+				},
+			});
+			await sweetMixinSuccessAlert('This property has been updated successfully.');
+			await router.push({
+				pathname: '/mypage',
+				query: {
+					category: 'myProperties',
+				},
+			});
+		} catch (err: any) {
+			sweetErrorHandling(err).then();
+		}
+	}, [insertPropertyData]);
 
 	if (user?.memberType !== 'AGENT') {
 		router.back();
@@ -191,6 +196,29 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 					<Stack className="config">
 						<Stack className="description-box">
 							<Stack className="config-column">
+								<Typography className="title">Make</Typography>
+								<select
+									className={'description-input'}
+									defaultValue={insertPropertyData.propertyMaker || 'select'}
+									value={insertPropertyData.propertyMaker || 'select'}
+									onChange={({ target: { value } }) =>
+										// @ts-ignore
+										setInsertPropertyData({ ...insertPropertyData, propertyMaker: value })
+									}
+								>
+									<>
+										<option selected={true} disabled={true} value={'select'}>
+											Select
+										</option>
+										{['HYUNDAI', 'KIA', 'GENESIS', 'GM', 'SSANGYONG'].map((make: any) => (
+											<option value={`${make}`} key={make}>
+												{make}
+											</option>
+										))}
+									</>
+								</select>
+							</Stack>
+							<Stack className="config-column">
 								<Typography className="title">Model</Typography>
 								<input
 									type="text"
@@ -204,6 +232,18 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 							</Stack>
 
 							<Stack className="config-row">
+								<Stack className="price-year-after-price">
+									<Typography className="title">Year</Typography>
+									<input
+										type="number"
+										className="description-input"
+										placeholder={'Price'}
+										value={insertPropertyData.propertyYear}
+										onChange={({ target: { value } }) =>
+											setInsertPropertyData({ ...insertPropertyData, propertyYear: parseInt(value) })
+										}
+									/>
+								</Stack>
 								<Stack className="price-year-after-price">
 									<Typography className="title">Price</Typography>
 									<input
@@ -332,13 +372,14 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 										value={insertPropertyData.propertyColor || 'select'}
 										defaultValue={insertPropertyData.propertyColor || 'select'}
 										onChange={({ target: { value } }) =>
+                      // @ts-ignore
 											setInsertPropertyData({ ...insertPropertyData, propertyColor: value })
 										}
 									>
 										<option disabled={true} selected={true} value={'select'}>
 											Select
 										</option>
-										{['White', 'Black', 'Red', 'Blue', 'Orange'].map((color: string) => (
+										{propertyColor.map((color: string) => (
 											<option value={`${color}`}>{color}</option>
 										))}
 									</select>
@@ -352,7 +393,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 										value={insertPropertyData.propertyFuel || 'select'}
 										defaultValue={insertPropertyData.propertyFuel || 'select'}
 										onChange={({ target: { value } }) =>
-											setInsertPropertyData({ ...insertPropertyData, propertyFuel: value as PropertyFuel})
+											setInsertPropertyData({ ...insertPropertyData, propertyFuel: value as PropertyFuel })
 										}
 									>
 										<option disabled={true} selected={true} value={'select'}>
@@ -514,7 +555,9 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 
 AddProperty.defaultProps = {
 	initialValues: {
+		propertyMaker: '',
 		propertyModel: '',
+		propertyYear: 0,
 		propertyPrice: 0,
 		propertyType: '',
 		propertyLocation: '',

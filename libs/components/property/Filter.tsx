@@ -13,7 +13,7 @@ import {
 	IconButton,
 } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
-import { PropertyLocation, PropertyType } from '../../enums/property.enum';
+import { PropertyColor, PropertyFuel, PropertyLocation, PropertyType } from '../../enums/property.enum';
 import { PropertiesInquiry } from '../../types/property/property.input';
 import { useRouter } from 'next/router';
 import CancelRoundedIcon from '@mui/icons-material/CancelRounded';
@@ -40,6 +40,8 @@ const Filter = (props: FilterType) => {
 	const router = useRouter();
 	const [propertyLocation, setPropertyLocation] = useState<PropertyLocation[]>(Object.values(PropertyLocation));
 	const [propertyType, setPropertyType] = useState<PropertyType[]>(Object.values(PropertyType));
+	const [propertyColor, setPropertyColor] = useState<PropertyColor[]>(Object.values(PropertyColor));
+	const [propertyFuel, setPropertyFuel] = useState<PropertyFuel[]>(Object.values(PropertyFuel));
 	const [searchText, setSearchText] = useState<string>('');
 	const [showMore, setShowMore] = useState<boolean>(false);
 
@@ -55,77 +57,107 @@ const Filter = (props: FilterType) => {
 		if (searchFilter?.search?.locationList?.length == 0) {
 			delete searchFilter.search.locationList;
 			setShowMore(false);
-			router.push(`/property?input=${JSON.stringify({
-        ...searchFilter,
-        search: {
-          ...searchFilter.search,
-        },
-      })}`, `/property?input=${JSON.stringify({
-        ...searchFilter,
-        search: {
-          ...searchFilter.search,
-        },
-      })}`, { scroll: false }).then();
+			router
+				.push(
+					`/property?input=${JSON.stringify({
+						...searchFilter,
+						search: {
+							...searchFilter.search,
+						},
+					})}`,
+					`/property?input=${JSON.stringify({
+						...searchFilter,
+						search: {
+							...searchFilter.search,
+						},
+					})}`,
+					{ scroll: false },
+				)
+				.then();
 		}
 
 		if (searchFilter?.search?.typeList?.length == 0) {
 			delete searchFilter.search.typeList;
-			router.push(`/property?input=${JSON.stringify({
-        ...searchFilter,
-        search: {
-          ...searchFilter.search,
-        },
-      })}`, `/property?input=${JSON.stringify({
-        ...searchFilter,
-        search: {
-          ...searchFilter.search,
-        },
-      })}`, { scroll: false }).then();
+			router
+				.push(
+					`/property?input=${JSON.stringify({
+						...searchFilter,
+						search: {
+							...searchFilter.search,
+						},
+					})}`,
+					`/property?input=${JSON.stringify({
+						...searchFilter,
+						search: {
+							...searchFilter.search,
+						},
+					})}`,
+					{ scroll: false },
+				)
+				.then();
 		}
 
 		if (searchFilter?.search?.colorList?.length == 0) {
 			delete searchFilter.search.colorList;
-			router.push(`/property?input=${JSON.stringify({
-        ...searchFilter,
-        search: {
-          ...searchFilter.search,
-        },
-      })}`, `/property?input=${JSON.stringify({
-        ...searchFilter,
-        search: {
-          ...searchFilter.search,
-        },
-      })}`, { scroll: false }).then();
+			router
+				.push(
+					`/property?input=${JSON.stringify({
+						...searchFilter,
+						search: {
+							...searchFilter.search,
+						},
+					})}`,
+					`/property?input=${JSON.stringify({
+						...searchFilter,
+						search: {
+							...searchFilter.search,
+						},
+					})}`,
+					{ scroll: false },
+				)
+				.then();
 		}
 
 		if (searchFilter?.search?.options?.length == 0) {
 			delete searchFilter.search.options;
-			router.push(`/property?input=${JSON.stringify({
-        ...searchFilter,
-        search: {
-          ...searchFilter.search,
-        },
-      })}`, `/property?input=${JSON.stringify({
-        ...searchFilter,
-        search: {
-          ...searchFilter.search,
-        },
-      })}`, { scroll: false }).then();
+			router
+				.push(
+					`/property?input=${JSON.stringify({
+						...searchFilter,
+						search: {
+							...searchFilter.search,
+						},
+					})}`,
+					`/property?input=${JSON.stringify({
+						...searchFilter,
+						search: {
+							...searchFilter.search,
+						},
+					})}`,
+					{ scroll: false },
+				)
+				.then();
 		}
 
 		if (searchFilter?.search?.fuelList?.length == 0) {
 			delete searchFilter.search.fuelList;
-			router.push(`/property?input=${JSON.stringify({
-        ...searchFilter,
-        search: {
-          ...searchFilter.search,
-        },
-      })}`, `/property?input=${JSON.stringify({
-        ...searchFilter,
-        search: {
-          ...searchFilter.search,
-        },
-      })}`, { scroll: false }).then();
+			router
+				.push(
+					`/property?input=${JSON.stringify({
+						...searchFilter,
+						search: {
+							...searchFilter.search,
+						},
+					})}`,
+					`/property?input=${JSON.stringify({
+						...searchFilter,
+						search: {
+							...searchFilter.search,
+						},
+					})}`,
+					{ scroll: false },
+				)
+				.then();
 		}
 
 		if (searchFilter?.search?.locationList) setShowMore(true);
@@ -169,7 +201,7 @@ const Filter = (props: FilterType) => {
 					);
 				}
 
-				if (searchFilter?.search?.typeList?.length == 0) {
+				if (searchFilter?.search?.locationList?.length == 0) {
 					alert('error');
 				}
 
@@ -230,62 +262,111 @@ const Filter = (props: FilterType) => {
 		[searchFilter],
 	);
 
+	// const propertyColorSelectHandler = useCallback(
+	// 	async (string: String) => {
+	// 		try {
+	// 			if (string != '') {
+	// 				if (searchFilter?.search?.colorList?.includes('')) {
+	// 					await router.push(
+	// 						`/property?input=${JSON.stringify({
+	// 							...searchFilter,
+	// 							search: {
+	// 								...searchFilter.search,
+	// 								colorList: searchFilter?.search?.colorList?.filter((item: String) => item !== string),
+	// 							},
+	// 						})}`,
+	// 						`/property?input=${JSON.stringify({
+	// 							...searchFilter,
+	// 							search: {
+	// 								...searchFilter.search,
+	// 								colorList: searchFilter?.search?.colorList?.filter((item: String) => item !== string),
+	// 							},
+	// 						})}`,
+	// 						{ scroll: false },
+	// 					);
+	// 				} else {
+	// 					await router.push(
+	// 						`/property?input=${JSON.stringify({
+	// 							...searchFilter,
+	// 							search: { ...searchFilter.search, colorList: [...(searchFilter?.search?.colorList || []), string] },
+	// 						})}`,
+	// 						`/property?input=${JSON.stringify({
+	// 							...searchFilter,
+	// 							search: { ...searchFilter.search, colorList: [...(searchFilter?.search?.colorList || []), string] },
+	// 						})}`,
+	// 						{ scroll: false },
+	// 					);
+	// 				}
+	// 			} else {
+	// 				delete searchFilter?.search.colorList;
+	// 				setSearchFilter({ ...searchFilter });
+	// 				await router.push(
+	// 					`/property?input=${JSON.stringify({
+	// 						...searchFilter,
+	// 						search: {
+	// 							...searchFilter.search,
+	// 						},
+	// 					})}`,
+	// 					`/property?input=${JSON.stringify({
+	// 						...searchFilter,
+	// 						search: {
+	// 							...searchFilter.search,
+	// 						},
+	// 					})}`,
+	// 					{ scroll: false },
+	// 				);
+	// 			}
+
+	// 			console.log('propertyColorSelectHandler:', string);
+	// 		} catch (err: any) {
+	// 			console.log('ERROR, propertyColorSelectHandler:', err);
+	// 		}
+	// 	},
+	// 	[searchFilter],
+	// );
+
 	const propertyColorSelectHandler = useCallback(
-		async (string: String) => {
+		async (e: any) => {
 			try {
-				if (string != '') {
-					if (searchFilter?.search?.colorList?.includes('')) {
-						await router.push(
-							`/property?input=${JSON.stringify({
-								...searchFilter,
-								search: {
-									...searchFilter.search,
-									colorList: searchFilter?.search?.colorList?.filter((item: String) => item !== string),
-								},
-							})}`,
-							`/property?input=${JSON.stringify({
-								...searchFilter,
-								search: {
-									...searchFilter.search,
-									colorList: searchFilter?.search?.colorList?.filter((item: String) => item !== string),
-								},
-							})}`,
-							{ scroll: false },
-						);
-					} else {
-						await router.push(
-							`/property?input=${JSON.stringify({
-								...searchFilter,
-								search: { ...searchFilter.search, colorList: [...(searchFilter?.search?.colorList || []), string] },
-							})}`,
-							`/property?input=${JSON.stringify({
-								...searchFilter,
-								search: { ...searchFilter.search, colorList: [...(searchFilter?.search?.colorList || []), string] },
-							})}`,
-							{ scroll: false },
-						);
-					}
-				} else {
-					delete searchFilter?.search.colorList;
-					setSearchFilter({ ...searchFilter });
+				const isChecked = e.target.checked;
+				const value = e.target.value;
+				if (isChecked) {
+					await router.push(
+						`/property?input=${JSON.stringify({
+							...searchFilter,
+							search: { ...searchFilter.search, colorList: [...(searchFilter?.search?.colorList || []), value] },
+						})}`,
+						`/property?input=${JSON.stringify({
+							...searchFilter,
+							search: { ...searchFilter.search, colorList: [...(searchFilter?.search?.colorList || []), value] },
+						})}`,
+						{ scroll: false },
+					);
+				} else if (searchFilter?.search?.colorList?.includes(value)) {
 					await router.push(
 						`/property?input=${JSON.stringify({
 							...searchFilter,
 							search: {
 								...searchFilter.search,
+								colorList: searchFilter?.search?.colorList?.filter((item: string) => item !== value),
 							},
 						})}`,
 						`/property?input=${JSON.stringify({
 							...searchFilter,
 							search: {
 								...searchFilter.search,
+								colorList: searchFilter?.search?.colorList?.filter((item: string) => item !== value),
 							},
 						})}`,
 						{ scroll: false },
 					);
 				}
 
-				console.log('propertyColorSelectHandler:', string);
+				if (searchFilter?.search?.colorList?.length == 0) {
+					alert('error');
+				}
+
+				console.log('propertyColorSelectHandler:', e.target.value);
 			} catch (err: any) {
 				console.log('ERROR, propertyColorSelectHandler:', err);
 			}
@@ -338,62 +419,111 @@ const Filter = (props: FilterType) => {
 		[searchFilter],
 	);
 
+	// const propertyFuelSelectHandler = useCallback(
+	// 	async (string: String) => {
+	// 		try {
+	// 			if (string != '') {
+	// 				if (searchFilter?.search?.fuelList?.includes('')) {
+	// 					await router.push(
+	// 						`/property?input=${JSON.stringify({
+	// 							...searchFilter,
+	// 							search: {
+	// 								...searchFilter.search,
+	// 								fuelList: searchFilter?.search?.fuelList?.filter((item: String) => item !== string),
+	// 							},
+	// 						})}`,
+	// 						`/property?input=${JSON.stringify({
+	// 							...searchFilter,
+	// 							search: {
+	// 								...searchFilter.search,
+	// 								fuelList: searchFilter?.search?.fuelList?.filter((item: String) => item !== string),
+	// 							},
+	// 						})}`,
+	// 						{ scroll: false },
+	// 					);
+	// 				} else {
+	// 					await router.push(
+	// 						`/property?input=${JSON.stringify({
+	// 							...searchFilter,
+	// 							search: { ...searchFilter.search, fuelList: [...(searchFilter?.search?.fuelList || []), string] },
+	// 						})}`,
+	// 						`/property?input=${JSON.stringify({
+	// 							...searchFilter,
+	// 							search: { ...searchFilter.search, fuelList: [...(searchFilter?.search?.fuelList || []), string] },
+	// 						})}`,
+	// 						{ scroll: false },
+	// 					);
+	// 				}
+	// 			} else {
+	// 				delete searchFilter?.search.fuelList;
+	// 				setSearchFilter({ ...searchFilter });
+	// 				await router.push(
+	// 					`/property?input=${JSON.stringify({
+	// 						...searchFilter,
+	// 						search: {
+	// 							...searchFilter.search,
+	// 						},
+	// 					})}`,
+	// 					`/property?input=${JSON.stringify({
+	// 						...searchFilter,
+	// 						search: {
+	// 							...searchFilter.search,
+	// 						},
+	// 					})}`,
+	// 					{ scroll: false },
+	// 				);
+	// 			}
+
+	// 			console.log('propertyFuelSelectHandler:', string);
+	// 		} catch (err: any) {
+	// 			console.log('ERROR, propertyFuelSelectHandler:', err);
+	// 		}
+	// 	},
+	// 	[searchFilter],
+	// );
+
 	const propertyFuelSelectHandler = useCallback(
-		async (string: String) => {
+		async (e: any) => {
 			try {
-				if (string != '') {
-					if (searchFilter?.search?.fuelList?.includes('')) {
-						await router.push(
-							`/property?input=${JSON.stringify({
-								...searchFilter,
-								search: {
-									...searchFilter.search,
-									fuelList: searchFilter?.search?.fuelList?.filter((item: String) => item !== string),
-								},
-							})}`,
-							`/property?input=${JSON.stringify({
-								...searchFilter,
-								search: {
-									...searchFilter.search,
-									fuelList: searchFilter?.search?.fuelList?.filter((item: String) => item !== string),
-								},
-							})}`,
-							{ scroll: false },
-						);
-					} else {
-						await router.push(
-							`/property?input=${JSON.stringify({
-								...searchFilter,
-								search: { ...searchFilter.search, fuelList: [...(searchFilter?.search?.fuelList || []), string] },
-							})}`,
-							`/property?input=${JSON.stringify({
-								...searchFilter,
-								search: { ...searchFilter.search, fuelList: [...(searchFilter?.search?.fuelList || []), string] },
-							})}`,
-							{ scroll: false },
-						);
-					}
-				} else {
-					delete searchFilter?.search.fuelList;
-					setSearchFilter({ ...searchFilter });
+				const isChecked = e.target.checked;
+				const value = e.target.value;
+				if (isChecked) {
+					await router.push(
+						`/property?input=${JSON.stringify({
+							...searchFilter,
+							search: { ...searchFilter.search, fuelList: [...(searchFilter?.search?.fuelList || []), value] },
+						})}`,
+						`/property?input=${JSON.stringify({
+							...searchFilter,
+							search: { ...searchFilter.search, fuelList: [...(searchFilter?.search?.fuelList || []), value] },
+						})}`,
+						{ scroll: false },
+					);
+				} else if (searchFilter?.search?.fuelList?.includes(value)) {
 					await router.push(
 						`/property?input=${JSON.stringify({
 							...searchFilter,
 							search: {
 								...searchFilter.search,
+								fuelList: searchFilter?.search?.fuelList?.filter((item: string) => item !== value),
 							},
 						})}`,
 						`/property?input=${JSON.stringify({
 							...searchFilter,
 							search: {
 								...searchFilter.search,
+								fuelList: searchFilter?.search?.fuelList?.filter((item: string) => item !== value),
 							},
 						})}`,
 						{ scroll: false },
 					);
 				}
 
-				console.log('propertyFuelSelectHandler:', string);
+				if (searchFilter?.search?.fuelList?.length == 0) {
+					alert('error');
+				}
+
+				console.log('propertyFuelSelectHandler:', e.target.value);
 			} catch (err: any) {
 				console.log('ERROR, propertyFuelSelectHandler:', err);
 			}
@@ -508,7 +638,7 @@ const Filter = (props: FilterType) => {
 		return (
 			<Stack className={'filter-main'}>
 				<Stack className={'find-your-home'} mb={'40px'}>
-					<Typography className={'title-main'}>Find Your Home</Typography>
+					<Typography className={'title-main'}>Find Your Vehicle</Typography>
 					<Stack className={'input-box'}>
 						<OutlinedInput
 							value={searchText}
@@ -599,7 +729,7 @@ const Filter = (props: FilterType) => {
 						</Stack>
 					))}
 				</Stack>
-				<Stack className={'find-your-home'} mb={'30px'}>
+				{/* <Stack className={'find-your-home'} mb={'30px'}>
 					<Typography className={'title'}>Select color</Typography>
 					<Stack className="button-group">
 						<Button
@@ -662,8 +792,44 @@ const Filter = (props: FilterType) => {
 							Orange
 						</Button>
 					</Stack>
-				</Stack>
+				</Stack> */}
+
 				<Stack className={'find-your-home'} mb={'30px'}>
+					<p className={'title'} style={{ textShadow: '0px 3px 4px #b9b9b9' }}>
+						Color
+					</p>
+					<Stack
+						className={`property-location`}
+						style={{ height: showMore ? '253px' : '115px' }}
+						onMouseEnter={() => setShowMore(true)}
+						onMouseLeave={() => {
+							if (!searchFilter?.search?.colorList) {
+								setShowMore(false);
+							}
+						}}
+					>
+						{propertyColor.map((color: string) => {
+							return (
+								<Stack className={'input-box'} key={color}>
+									<Checkbox
+										id={color}
+										className="property-checkbox"
+										color="default"
+										size="small"
+										value={color}
+										checked={(searchFilter?.search?.colorList || []).includes(color as PropertyColor)}
+										onChange={propertyColorSelectHandler}
+									/>
+									<label htmlFor={color} style={{ cursor: 'pointer' }}>
+										<Typography className="property-type">{color}</Typography>
+									</label>
+								</Stack>
+							);
+						})}
+					</Stack>
+				</Stack>
+
+				{/* <Stack className={'find-your-home'} mb={'30px'}>
 					<Typography className={'title'}>Fuel type</Typography>
 					<Stack className="button-group">
 						<Button
@@ -678,7 +844,9 @@ const Filter = (props: FilterType) => {
 						<Button
 							sx={{
 								borderRadius: 0,
-								border: searchFilter?.search?.fuelList?.includes('ELECTRIC') ? '2px solid #181A20' : '1px solid #b9b9b9',
+								border: searchFilter?.search?.fuelList?.includes('ELECTRIC')
+									? '2px solid #181A20'
+									: '1px solid #b9b9b9',
 								borderLeft: searchFilter?.search?.fuelList?.includes('ELECTRIC') ? undefined : 'none',
 							}}
 							onClick={() => propertyFuelSelectHandler('ELECTRIC')}
@@ -688,7 +856,9 @@ const Filter = (props: FilterType) => {
 						<Button
 							sx={{
 								borderRadius: 0,
-								border: searchFilter?.search?.fuelList?.includes('GASOLINE') ? '2px solid #181A20' : '1px solid #b9b9b9',
+								border: searchFilter?.search?.fuelList?.includes('GASOLINE')
+									? '2px solid #181A20'
+									: '1px solid #b9b9b9',
 								borderLeft: searchFilter?.search?.fuelList?.includes('GASOLINE') ? undefined : 'none',
 							}}
 							onClick={() => propertyFuelSelectHandler('GASOLINE')}
@@ -727,6 +897,61 @@ const Filter = (props: FilterType) => {
 							LPG
 						</Button>
 					</Stack>
+				</Stack> */}
+
+				{/* <Stack className={'find-your-home'} mb={'30px'}>
+					<p className={'title'} style={{ textShadow: '0px 3px 4px #b9b9b9' }}>
+						Fuel Type
+					</p>
+					<Stack
+						className={`property-location`}
+						style={{ height: showMore ? '253px' : '115px' }}
+						onMouseEnter={() => setShowMore(true)}
+						onMouseLeave={() => {
+							if (!searchFilter?.search?.fuelList) {
+								setShowMore(false);
+							}
+						}}
+					>
+						{propertyFuel.map((fuel: string) => {
+							return (
+								<Stack className={'input-box'} key={fuel}>
+									<Checkbox
+										id={fuel}
+										className="property-checkbox"
+										color="default"
+										size="small"
+										value={fuel}
+										checked={(searchFilter?.search?.fuelList || []).includes(fuel as PropertyFuel)}
+										onChange={propertyFuelSelectHandler}
+									/>
+									<label htmlFor={fuel} style={{ cursor: 'pointer' }}>
+										<Typography className="property-type">{fuel}</Typography>
+									</label>
+								</Stack>
+							);
+						})}
+					</Stack>
+				</Stack> */}
+
+				<Stack className={'find-your-home'} mb={'30px'}>
+					<Typography className={'title'}>Fuel Type</Typography>
+					{propertyFuel.map((fuel: string) => (
+						<Stack className={'input-box'} key={fuel}>
+							<Checkbox
+								id={fuel}
+								className="property-checkbox"
+								color="default"
+								size="small"
+								value={fuel}
+								onChange={propertyFuelSelectHandler}
+								checked={(searchFilter?.search?.fuelList || []).includes(fuel as PropertyFuel)}
+							/>
+							<label style={{ cursor: 'pointer' }}>
+								<Typography className="property_type">{fuel}</Typography>
+							</label>
+						</Stack>
+					))}
 				</Stack>
 				<Stack className={'find-your-home'} mb={'30px'}>
 					<Typography className={'title'}>Options</Typography>

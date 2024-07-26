@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Typography, Box } from '@mui/material';
+import { Stack, Typography, Box, Divider } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
@@ -53,6 +53,12 @@ const PropertyCard = (props: PropertyCardType) => {
 				</Stack>
 				<Stack className="bottom">
 					<Stack className="name-address">
+						{/* <Stack >
+							<Stack>Hello</Stack>
+							<Divider orientation="vertical" style={{ height: '20px' }} />
+							<Stack>Hi</Stack>
+						</Stack> */}
+
 						<Stack className="name">
 							<Link
 								href={{
@@ -71,13 +77,13 @@ const PropertyCard = (props: PropertyCardType) => {
 					</Stack>
 					<Stack className="options">
 						<Stack className="option">
-							<img src="/img/icons/bed.svg" alt="" /> <Typography>{property.propertyFuel} fuel</Typography>
+							<img src="/img/icons/fuel.svg" alt="" /> <Typography>{property.propertyFuel} </Typography>
 						</Stack>
 						<Stack className="option">
-							<img src="/img/icons/room.svg" alt="" /> <Typography>{property.propertyColor} color</Typography>
+							<img src="/img/icons/color.svg" alt="" /> <Typography>{property.propertyColor}</Typography>
 						</Stack>
 						<Stack className="option">
-							<img src="/img/icons/expand.svg" alt="" /> <Typography>{property.propertyMileage} km</Typography>
+							<img src="/img/icons/mileage.svg" alt="" /> <Typography>{property.propertyMileage} km</Typography>
 						</Stack>
 					</Stack>
 					<Stack className="divider"></Stack>

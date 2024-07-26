@@ -43,15 +43,15 @@ const pushDetailHandler = async (propertyId: string) => {
 					<p className={'desc'}>{property.propertyDesc ?? 'no description'} </p>
 					<div className={'options'}>
 						<div>
-							<img src="/img/icons/bed.svg" alt="" />
+							<img src="/img/icons/fuel.svg" alt="" />
 							<span>{property.propertyFuel} Fuel</span>
 						</div>
 						<div>
-							<img src="/img/icons/room.svg" alt="" />
+							<img src="/img/icons/color.svg" alt="" />
 							<span>{property.propertyColor} Color</span>
 						</div>
 						<div>
-							<img src="/img/icons/expand.svg" alt="" />
+							<img src="/img/icons/mileage.svg" alt="" />
 							<span>{property.propertyMileage} km</span>
 						</div>
 					</div>
@@ -95,15 +95,15 @@ const pushDetailHandler = async (propertyId: string) => {
 					<p className={'desc'}>{property.propertyDesc ?? 'no description'}</p>
 					<div className={'options'}>
 						<div>
-							<img src="/img/icons/bed.svg" alt="" />
-							<span>{property.propertyFuel} Fuel</span>
+							<img src="/img/icons/fuel.svg" alt="" />
+							<span>{property.propertyFuel}</span>
 						</div>
 						<div>
-							<img src="/img/icons/room.svg" alt="" />
-							<span>{property.propertyColor} Color</span>
+							<img src="/img/icons/color.svg" alt="" />
+							<span>{property.propertyColor}</span>
 						</div>
 						<div>
-							<img src="/img/icons/expand.svg" alt="" />
+							<img src="/img/icons/mileage.svg" alt="" />
 							<span>{property.propertyMileage} km</span>
 						</div>
 					</div>

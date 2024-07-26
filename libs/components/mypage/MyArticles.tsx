@@ -8,7 +8,7 @@ import { userVar } from '../../../apollo/store';
 import { T } from '../../types/common';
 import { BoardArticle } from '../../types/board-article/board-article';
 import { LIKE_TARGET_BOARD_ARTICLE } from '../../../apollo/user/mutation';
-import { GET_BOARD_ARTICLE } from '../../../apollo/user/query';
+import { GET_BOARD_ARTICLES } from '../../../apollo/user/query';
 import { sweetMixinErrorAlert, sweetTopSmallSuccessAlert } from '../../sweetAlert';
 import { Messages } from '../../config';
 
@@ -31,7 +31,7 @@ const MyArticles: NextPage = ({ initialInput, ...props }: T) => {
 		data: boardArticlesData,
 		error: boardArticlesError,
 		refetch: boardArticlesRefetch,
-	} = useQuery(GET_BOARD_ARTICLE, {
+	} = useQuery(GET_BOARD_ARTICLES, {
     fetchPolicy: 'network-only',
     variables: {input: searchCommunity},
     notifyOnNetworkStatusChange: true,

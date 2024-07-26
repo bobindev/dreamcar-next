@@ -279,11 +279,13 @@
 								width: 100%;
 								height: 173px;
 								padding: 20px 16px 10px 16px;
+                
 								.name-address {
 									width: 100%;
 									height: 48px;
 									gap: 5px;
 									margin-bottom: 20px;
+									
 									.name {
 										width: 100%;
 										height: 23px;
@@ -321,6 +323,10 @@
 										flex-direction: row;
 										gap: 5px;
 										align-items: center;
+										img {
+											width: 20px;
+											height: 20px;
+										}
 										p {
 											color: #181a20;
 											font-family: $font;

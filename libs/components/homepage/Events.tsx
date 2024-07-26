@@ -1,6 +1,7 @@
-import React from 'react';
-import { Stack, Box } from '@mui/material';
+import React, { useState } from 'react';
+import { Stack, Box, Button } from '@mui/material';
 import useDeviceDetect from '../../hooks/useDeviceDetect';
+import Image from 'next/image';
 
 interface EventData {
 	eventTitle: string;
@@ -67,24 +68,60 @@ const EventCard = ({ event }: { event: EventData }) => {
 
 const Events = () => {
 	const device = useDeviceDetect();
+	const [selectedCity, setSelectedCity] = useState<string | null>(null);
+
+	const handleCityClick = (city: string) => {
+		setSelectedCity(city);
+	};
+
+	const filteredEvents = selectedCity ? eventsData.filter((event) => event.city === selectedCity) : eventsData;
 
 	if (device === 'mobile') {
 		return <div>EVENT CARD</div>;
 	} else {
 		return (
 			<Stack className={'events'}>
+				<Stack className='event-title'>
+					<span className={'white'}>Events</span>
+				</Stack>
+
+				<Stack className={'navbar'}>
+					{eventsData.map((event) => (
+						<span
+							key={event.city}
+							onClick={() => handleCityClick(event.city)}
+							className={selectedCity === event.city ? 'active' : ''}
+						>
+							{event.city}
+						</span>
+					))}
+				</Stack>
 				<Stack className={'container'}>
 					<Stack className={'info-box'}>
 						<Box component={'div'} className={'left'}>
-							<span className={'white'}>Events</span>
-							<p className={'white'}>Events waiting your attention!</p>
+							{filteredEvents.length > 0 ? (
+								<>
+									<h2>{filteredEvents[0].eventTitle}</h2>
+									<h3>{filteredEvents[0].city}</h3>
+									<Button variant="contained" color="primary">
+										Learn More
+									</Button>
+								</>
+							) : (
+								<p>Select a city to see events</p>
+							)}
+						</Box>
+						<Box className={'right'}>
+							{filteredEvents.length > 0 && (
+								<Image src={filteredEvents[0].imageSrc} alt={filteredEvents[0].eventTitle} width={800} height={500} />
+							)}
 						</Box>
 					</Stack>
-					<Stack className={'card-wrapper'}>
-						{eventsData.map((event: EventData) => {
+					{/* <Stack className={'card-wrapper'}>
+						{eventsData.map((event) => {
 							return <EventCard event={event} key={event?.eventTitle} />;
 						})}
-					</Stack>
+					</Stack> */}
 				</Stack>
 			</Stack>
 		);

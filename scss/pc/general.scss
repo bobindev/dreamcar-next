@@ -163,6 +163,10 @@
 	margin-bottom: 34px;
 	display: flex;
 	flex-direction: column;
+	border: 1px solid grey;
+	border-radius: 12px;
+	margin: 5px;
+	padding: 5px;
 	.agent-img {
 		border-radius: 12px;
 		width: 233px;
@@ -186,11 +190,13 @@
 		}
 	}
 	.agent-desc {
-		margin-top: 23px;
+		margin-top: 15px;
 		display: flex;
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
+		border-top: 1px solid grey;
+		padding: 5px;
 		.agent-info {
 			display: flex;
 			flex-direction: column;

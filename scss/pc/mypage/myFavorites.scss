@@ -148,6 +148,10 @@
 								flex-direction: row;
 								gap: 5px;
 								align-items: center;
+                img {
+                  width: 20px;
+                  height: 20px;
+                }
 								p {
 									color: #181a20;
 									font-family: $font;

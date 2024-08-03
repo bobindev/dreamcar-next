@@ -21,7 +21,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 	const [insertPropertyData, setInsertPropertyData] = useState<PropertyInput>(initialValues);
 	const [propertyType, setPropertyType] = useState<PropertyType[]>(Object.values(PropertyType));
 	const [propertyLocation, setPropertyLocation] = useState<PropertyLocation[]>(Object.values(PropertyLocation));
-  const [propertyColor, setPropertyColor] = useState<PropertyColor[]>(Object.values(PropertyColor));
+	const [propertyColor, setPropertyColor] = useState<PropertyColor[]>(Object.values(PropertyColor));
 	const token = getJwtToken();
 	const user = useReactiveVar(userVar);
 
@@ -195,7 +195,44 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 				<div>
 					<Stack className="config">
 						<Stack className="description-box">
-							<Stack className="config-column">
+							<Stack style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between', gap: '10px'}}>
+								<Stack className="config-column">
+									<Typography className="title">Make</Typography>
+									<select
+										className={'description-input'}
+										defaultValue={insertPropertyData.propertyMaker || 'select'}
+										value={insertPropertyData.propertyMaker || 'select'}
+										onChange={({ target: { value } }) =>
+											// @ts-ignore
+											setInsertPropertyData({ ...insertPropertyData, propertyMaker: value })
+										}
+									>
+										<>
+											<option selected={true} disabled={true} value={'select'}>
+												Select
+											</option>
+											{['HYUNDAI', 'KIA', 'GENESIS', 'GM', 'SSANGYONG'].map((make: any) => (
+												<option value={`${make}`} key={make}>
+													{make}
+												</option>
+											))}
+										</>
+									</select>
+								</Stack>
+								<Stack className="config-column">
+									<Typography className="title">Model</Typography>
+									<input
+										type="text"
+										className="description-input"
+										placeholder={'Title'}
+										value={insertPropertyData.propertyModel}
+										onChange={({ target: { value } }) =>
+											setInsertPropertyData({ ...insertPropertyData, propertyModel: value })
+										}
+									/>
+								</Stack>
+							</Stack>
+							{/* <Stack className="config-column">
 								<Typography className="title">Make</Typography>
 								<select
 									className={'description-input'}
@@ -229,7 +266,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 										setInsertPropertyData({ ...insertPropertyData, propertyModel: value })
 									}
 								/>
-							</Stack>
+							</Stack> */}
 
 							<Stack className="config-row">
 								<Stack className="price-year-after-price">
@@ -372,7 +409,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 										value={insertPropertyData.propertyColor || 'select'}
 										defaultValue={insertPropertyData.propertyColor || 'select'}
 										onChange={({ target: { value } }) =>
-                      // @ts-ignore
+											// @ts-ignore
 											setInsertPropertyData({ ...insertPropertyData, propertyColor: value })
 										}
 									>

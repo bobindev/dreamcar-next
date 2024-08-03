@@ -79,11 +79,12 @@ body::-webkit-scrollbar {
 						display: flex;
 						flex-direction: row;
 						justify-content: space-between;
+            
 						div {
 							position: relative;
 							color: #eeeeeeed;
 							font-family: $font;
-							font-size: 15px;
+							font-size: 20px;
 							font-style: normal;
 							font-weight: 600;
 							line-height: normal;
@@ -122,6 +123,7 @@ body::-webkit-scrollbar {
 						display: flex;
 						flex-direction: row;
 						justify-content: flex-end;
+            
 						.join-box {
 							width: 184px;
 							height: 47px;
@@ -131,6 +133,7 @@ body::-webkit-scrollbar {
 							border-radius: 60px;
 							border: 1px solid #ffffff;
 							cursor: pointer;
+              background: #F17742;
 							svg {
 								color: #ffffff;
 								margin-right: 10px;

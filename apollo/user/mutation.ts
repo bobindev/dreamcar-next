@@ -226,23 +226,22 @@ export const LIKE_TARGET_PROPERTY = gql`
  *************************/
 
 export const CREATE_BOARD_ARTICLE = gql`
-    mutation CreateBoardArticle ($input: BoardArticleInput!) {
-    createBoardArticle(input: $input) {
-        _id
-        articleCategory
-        articleStatus
-        articleTitle
-        articleContent
-        articleImage
-        articleViews
-        articleLikes
-        articleComments
-        memberId
-        createdAt
-        updatedAt
-    }
-}
-
+	mutation CreateBoardArticle($input: BoardArticleInput!) {
+		createBoardArticle(input: $input) {
+			_id
+			articleCategory
+			articleStatus
+			articleTitle
+			articleContent
+			articleImage
+			articleViews
+			articleLikes
+			articleComments
+			memberId
+			createdAt
+			updatedAt
+		}
+	}
 `;
 
 export const UPDATE_BOARD_ARTICLE = gql`
@@ -339,6 +338,46 @@ export const UNSUBSCRIBE = gql`
 			followerId
 			createdAt
 			updatedAt
+		}
+	}
+`;
+
+/**************************
+ *     Notification       *
+ *************************/
+
+export const MARKNOTIFICATIONREAD = gql`
+	mutation MarkNotificationsAsRead($ids: [String!]!) {
+		markNotificationsAsRead(ids: $ids) {
+			_id
+			notificationType
+			notificationStatus
+			notificationGroup
+			notificationTitle
+			notificationDesc
+			authorId
+			receiverId
+			propertyId
+			articleId
+			createdAt
+		}
+	}
+`;
+
+/**************************
+ *    CONTACT MESSAGE      *
+ *************************/
+
+export const CREATE_MESSAGE = gql`
+	mutation CreateMessage($input: ContactInput!) {
+		createMessage(input: $input) {
+			_id
+			name
+			phone
+			email
+			message
+			contactRefId
+			memberId
 		}
 	}
 `;

@@ -53,12 +53,6 @@ const PropertyCard = (props: PropertyCardType) => {
 				</Stack>
 				<Stack className="bottom">
 					<Stack className="name-address">
-						{/* <Stack >
-							<Stack>Hello</Stack>
-							<Divider orientation="vertical" style={{ height: '20px' }} />
-							<Stack>Hi</Stack>
-						</Stack> */}
-
 						<Stack className="name">
 							<Link
 								href={{
@@ -83,7 +77,8 @@ const PropertyCard = (props: PropertyCardType) => {
 							<img src="/img/icons/color.svg" alt="" /> <Typography>{property.propertyColor}</Typography>
 						</Stack>
 						<Stack className="option">
-							<img src="/img/icons/mileage.svg" alt="" /> <Typography>{property.propertyMileage} km</Typography>
+							<img src="/img/icons/mileage.svg" alt="" />{' '}
+							<Typography>{formatterStr(property?.propertyMileage)} km</Typography>
 						</Stack>
 					</Stack>
 					<Stack className="divider"></Stack>

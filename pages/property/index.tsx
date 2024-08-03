@@ -170,10 +170,7 @@ const PropertyList: NextPage = ({ initialInput, ...props }: any) => {
 						</div>
 					</Box>
 					<Stack className={'property-page'}>
-						<Stack className={'filter-config'}>
-							{/* @ts-ignore */}
-							<Filter searchFilter={searchFilter} setSearchFilter={setSearchFilter} initialInput={initialInput} />
-						</Stack>
+						
 						<Stack className="main-config" mb={'76px'}>
 							<Stack className={'list-config'}>
 								{properties?.length === 0 ? (
@@ -203,11 +200,15 @@ const PropertyList: NextPage = ({ initialInput, ...props }: any) => {
 								{properties.length !== 0 && (
 									<Stack className="total-result">
 										<Typography>
-											Total {total} propert{total > 1 ? 'ies' : 'y'} available
+											Total {total} vehicl{total > 1 ? 'es' : 'e'} available
 										</Typography>
 									</Stack>
 								)}
 							</Stack>
+						</Stack>
+            <Stack className={'filter-config'}>
+							{/* @ts-ignore */}
+							<Filter searchFilter={searchFilter} setSearchFilter={setSearchFilter} initialInput={initialInput} />
 						</Stack>
 					</Stack>
 				</div>

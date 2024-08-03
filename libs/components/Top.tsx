@@ -17,6 +17,7 @@ import { useReactiveVar } from '@apollo/client';
 import { userVar } from '../../apollo/store';
 import { Logout } from '@mui/icons-material';
 import { REACT_APP_API_URL } from '../config';
+import BasicPopover from './notification/Notification';
 
 const Top = () => {
 	const device = useDeviceDetect();
@@ -85,6 +86,10 @@ const Top = () => {
 		}
 	};
 
+	const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+		setAnchorEl(event.currentTarget);
+	};
+
 	const handleClose = () => {
 		setAnchorEl(null);
 	};
@@ -97,12 +102,12 @@ const Top = () => {
 		}
 	};
 
-  const linkStyle = {
-    textDecoration: 'underline',
-    textDecorationColor: 'orange',
-    textDecorationThickness: '2px',
-    textUnderlineOffset: '5px',
-  };
+	const linkStyle = {
+		textDecoration: 'underline',
+		textDecorationColor: 'orange',
+		textDecorationThickness: '2px',
+		textUnderlineOffset: '5px',
+	};
 
 	const StyledMenu = styled((props: MenuProps) => (
 		<Menu
@@ -152,8 +157,8 @@ const Top = () => {
 				<Link href={'/'}>
 					<div>{t('Home')}</div>
 				</Link>
-				<Link href={'/property'} >
-					<div >{t('Properties')}</div>
+				<Link href={'/property'}>
+					<div>{t('Properties')}</div>
 				</Link>
 				<Link href={'/agent'}>
 					<div> {t('Agents')} </div>
@@ -173,7 +178,7 @@ const Top = () => {
 					<Stack className={'container'}>
 						<Box component={'div'} className={'logo-box'}>
 							<Link href={'/'}>
-                <div className='main-title'>DREAMCAR</div>
+								<div className="main-title">DREAMCAR</div>
 							</Link>
 						</Box>
 						<Box component={'div'} className={'router-box'}>
@@ -181,21 +186,21 @@ const Top = () => {
 								<div style={router.pathname === '/' ? linkStyle : {}}>{t('Home')}</div>
 							</Link>
 							<Link href={'/property'}>
-								<div  style={router.pathname === '/property' ? linkStyle : {}}>{t('Properties')}</div>
+								<div style={router.pathname === '/property' ? linkStyle : {}}>{t('Showroom')}</div>
 							</Link>
 							<Link href={'/agent'}>
-								<div  style={router.pathname === '/agent' ? linkStyle : {}}> {t('Agents')} </div>
+								<div style={router.pathname === '/agent' ? linkStyle : {}}> {t('Agents')} </div>
 							</Link>
 							<Link href={'/community?articleCategory=FREE'}>
-								<div  style={router.pathname === '/community' ? linkStyle : {}}> {t('Community')} </div>
+								<div style={router.pathname === '/community' ? linkStyle : {}}> {t('Community')} </div>
 							</Link>
 							{user?._id && (
 								<Link href={'/mypage'}>
-									<div  style={router.pathname === '/mypage' ? linkStyle : {}}> {t('My Page')} </div>
+									<div style={router.pathname === '/mypage' ? linkStyle : {}}> {t('My Page')} </div>
 								</Link>
 							)}
 							<Link href={'/cs'}>
-								<div  style={router.pathname === '/cs' ? linkStyle : {}}> {t('CS')} </div>
+								<div style={router.pathname === '/cs' ? linkStyle : {}}> {t('Service')} </div>
 							</Link>
 						</Box>
 						<Box component={'div'} className={'user-box'}>
@@ -237,7 +242,8 @@ const Top = () => {
 							)}
 
 							<div className={'lan-box'}>
-								{user?._id && <NotificationsOutlinedIcon className={'notification-icon'} />}
+								{/* {user?._id && <NotificationsOutlinedIcon className={'notification-icon'} />} */}
+								{user?._id && <BasicPopover />}
 								<Button
 									disableRipple
 									className="btn-lang"

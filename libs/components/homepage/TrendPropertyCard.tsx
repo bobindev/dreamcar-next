@@ -12,7 +12,7 @@ import { userVar } from '../../../apollo/store';
 
 interface TrendPropertyCardProps {
 	property: Property;
-  likePropertyHanler: any
+	likePropertyHanler: any;
 }
 
 const TrendPropertyCard = (props: TrendPropertyCardProps) => {
@@ -22,10 +22,10 @@ const TrendPropertyCard = (props: TrendPropertyCardProps) => {
 	const user = useReactiveVar(userVar);
 
 	/** HANDLERS **/
-const pushDetailHandler = async (propertyId: string) => {
-  console.log('propertyId', propertyId);
-  await router.push({ pathname: '/property/detail', query: { id: propertyId}})
-};
+	const pushDetailHandler = async (propertyId: string) => {
+		console.log('propertyId', propertyId);
+		await router.push({ pathname: '/property/detail', query: { id: propertyId } });
+	};
 
 	if (device === 'mobile') {
 		return (
@@ -34,12 +34,14 @@ const pushDetailHandler = async (propertyId: string) => {
 					component={'div'}
 					className={'card-img'}
 					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${property?.propertyImages[0]})` }}
-          onClick={() => pushDetailHandler(property._id)}
+					onClick={() => pushDetailHandler(property._id)}
 				>
 					<div>${property.propertyPrice}</div>
 				</Box>
 				<Box component={'div'} className={'info'}>
-					<strong className={'title'} onClick={() => pushDetailHandler(property._id)}>{property.propertyModel}</strong>
+					<strong className={'title'} onClick={() => pushDetailHandler(property._id)}>
+						{property.propertyModel}
+					</strong>
 					<p className={'desc'}>{property.propertyDesc ?? 'no description'} </p>
 					<div className={'options'}>
 						<div>
@@ -86,12 +88,28 @@ const pushDetailHandler = async (propertyId: string) => {
 					component={'div'}
 					className={'card-img'}
 					style={{ backgroundImage: `url(${REACT_APP_API_URL}/${property?.propertyImages[0]})` }}
-          onClick={() => pushDetailHandler(property._id)}
+					// onClick={() => pushDetailHandler(property._id)}
 				>
-					<div>${property.propertyPrice}</div>
+					<div className="view-like-box">
+						<IconButton color={'default'}>
+							<RemoveRedEyeIcon />
+						</IconButton>
+						<Typography className="view-cnt">{property?.propertyViews}</Typography>
+						<IconButton color={'default'} onClick={() => likePropertyHanler(user, property?._id)}>
+							{property?.meLiked && property?.meLiked[0]?.myFavorite ? (
+								<FavoriteIcon style={{ color: 'red' }} />
+							) : (
+								<FavoriteIcon />
+							)}
+						</IconButton>
+						<Typography className="view-cnt">{property?.propertyLikes}</Typography>
+					</div>
 				</Box>
 				<Box component={'div'} className={'info'}>
-					<strong className={'title'} onClick={() => pushDetailHandler(property._id)}>{property.propertyModel}</strong>
+					<div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+						<strong className={'title'}>{property.propertyModel}</strong>
+						<div>${property.propertyPrice}</div>
+					</div>
 					<p className={'desc'}>{property.propertyDesc ?? 'no description'}</p>
 					<div className={'options'}>
 						<div>
@@ -113,20 +131,10 @@ const pushDetailHandler = async (propertyId: string) => {
 							{property.propertyRent ? 'Rent' : ''} {property.propertyRent && property.propertyBarter && '/'}{' '}
 							{property.propertyBarter ? 'Barter' : ''}
 						</p>
-						<div className="view-like-box">
-							<IconButton color={'default'}>
-								<RemoveRedEyeIcon />
-							</IconButton>
-							<Typography className="view-cnt">{property?.propertyViews}</Typography>
-							<IconButton color={'default'} onClick={() => likePropertyHanler(user, property?._id)}>
-								{property?.meLiked && property?.meLiked[0]?.myFavorite ? (
-									<FavoriteIcon style={{ color: 'red' }} />
-								) : (
-									<FavoriteIcon />
-								)}
-							</IconButton>
-							<Typography className="view-cnt">{property?.propertyLikes}</Typography>
-						</div>
+						<p className="detail" onClick={() => pushDetailHandler(property._id)}>
+							<span>View details</span>
+							<img src="/img/icons/rightup.svg" alt="" />
+						</p>
 					</div>
 				</Box>
 			</Stack>

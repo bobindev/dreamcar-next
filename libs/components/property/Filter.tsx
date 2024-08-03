@@ -262,69 +262,6 @@ const Filter = (props: FilterType) => {
 		[searchFilter],
 	);
 
-	// const propertyColorSelectHandler = useCallback(
-	// 	async (string: String) => {
-	// 		try {
-	// 			if (string != '') {
-	// 				if (searchFilter?.search?.colorList?.includes('')) {
-	// 					await router.push(
-	// 						`/property?input=${JSON.stringify({
-	// 							...searchFilter,
-	// 							search: {
-	// 								...searchFilter.search,
-	// 								colorList: searchFilter?.search?.colorList?.filter((item: String) => item !== string),
-	// 							},
-	// 						})}`,
-	// 						`/property?input=${JSON.stringify({
-	// 							...searchFilter,
-	// 							search: {
-	// 								...searchFilter.search,
-	// 								colorList: searchFilter?.search?.colorList?.filter((item: String) => item !== string),
-	// 							},
-	// 						})}`,
-	// 						{ scroll: false },
-	// 					);
-	// 				} else {
-	// 					await router.push(
-	// 						`/property?input=${JSON.stringify({
-	// 							...searchFilter,
-	// 							search: { ...searchFilter.search, colorList: [...(searchFilter?.search?.colorList || []), string] },
-	// 						})}`,
-	// 						`/property?input=${JSON.stringify({
-	// 							...searchFilter,
-	// 							search: { ...searchFilter.search, colorList: [...(searchFilter?.search?.colorList || []), string] },
-	// 						})}`,
-	// 						{ scroll: false },
-	// 					);
-	// 				}
-	// 			} else {
-	// 				delete searchFilter?.search.colorList;
-	// 				setSearchFilter({ ...searchFilter });
-	// 				await router.push(
-	// 					`/property?input=${JSON.stringify({
-	// 						...searchFilter,
-	// 						search: {
-	// 							...searchFilter.search,
-	// 						},
-	// 					})}`,
-	// 					`/property?input=${JSON.stringify({
-	// 						...searchFilter,
-	// 						search: {
-	// 							...searchFilter.search,
-	// 						},
-	// 					})}`,
-	// 					{ scroll: false },
-	// 				);
-	// 			}
-
-	// 			console.log('propertyColorSelectHandler:', string);
-	// 		} catch (err: any) {
-	// 			console.log('ERROR, propertyColorSelectHandler:', err);
-	// 		}
-	// 	},
-	// 	[searchFilter],
-	// );
-
 	const propertyColorSelectHandler = useCallback(
 		async (e: any) => {
 			try {
@@ -418,69 +355,6 @@ const Filter = (props: FilterType) => {
 		},
 		[searchFilter],
 	);
-
-	// const propertyFuelSelectHandler = useCallback(
-	// 	async (string: String) => {
-	// 		try {
-	// 			if (string != '') {
-	// 				if (searchFilter?.search?.fuelList?.includes('')) {
-	// 					await router.push(
-	// 						`/property?input=${JSON.stringify({
-	// 							...searchFilter,
-	// 							search: {
-	// 								...searchFilter.search,
-	// 								fuelList: searchFilter?.search?.fuelList?.filter((item: String) => item !== string),
-	// 							},
-	// 						})}`,
-	// 						`/property?input=${JSON.stringify({
-	// 							...searchFilter,
-	// 							search: {
-	// 								...searchFilter.search,
-	// 								fuelList: searchFilter?.search?.fuelList?.filter((item: String) => item !== string),
-	// 							},
-	// 						})}`,
-	// 						{ scroll: false },
-	// 					);
-	// 				} else {
-	// 					await router.push(
-	// 						`/property?input=${JSON.stringify({
-	// 							...searchFilter,
-	// 							search: { ...searchFilter.search, fuelList: [...(searchFilter?.search?.fuelList || []), string] },
-	// 						})}`,
-	// 						`/property?input=${JSON.stringify({
-	// 							...searchFilter,
-	// 							search: { ...searchFilter.search, fuelList: [...(searchFilter?.search?.fuelList || []), string] },
-	// 						})}`,
-	// 						{ scroll: false },
-	// 					);
-	// 				}
-	// 			} else {
-	// 				delete searchFilter?.search.fuelList;
-	// 				setSearchFilter({ ...searchFilter });
-	// 				await router.push(
-	// 					`/property?input=${JSON.stringify({
-	// 						...searchFilter,
-	// 						search: {
-	// 							...searchFilter.search,
-	// 						},
-	// 					})}`,
-	// 					`/property?input=${JSON.stringify({
-	// 						...searchFilter,
-	// 						search: {
-	// 							...searchFilter.search,
-	// 						},
-	// 					})}`,
-	// 					{ scroll: false },
-	// 				);
-	// 			}
-
-	// 			console.log('propertyFuelSelectHandler:', string);
-	// 		} catch (err: any) {
-	// 			console.log('ERROR, propertyFuelSelectHandler:', err);
-	// 		}
-	// 	},
-	// 	[searchFilter],
-	// );
 
 	const propertyFuelSelectHandler = useCallback(
 		async (e: any) => {
@@ -711,7 +585,7 @@ const Filter = (props: FilterType) => {
 					</Stack>
 				</Stack>
 				<Stack className={'find-your-home'} mb={'30px'}>
-					<Typography className={'title'}>Property Type</Typography>
+					<Typography className={'title'}>Type</Typography>
 					{propertyType.map((type: string) => (
 						<Stack className={'input-box'} key={type}>
 							<Checkbox
@@ -729,70 +603,6 @@ const Filter = (props: FilterType) => {
 						</Stack>
 					))}
 				</Stack>
-				{/* <Stack className={'find-your-home'} mb={'30px'}>
-					<Typography className={'title'}>Select color</Typography>
-					<Stack className="button-group">
-						<Button
-							sx={{
-								borderRadius: '12px 0 0 12px',
-								border: !searchFilter?.search?.colorList ? '2px solid #181A20' : '1px solid #b9b9b9',
-							}}
-							onClick={() => propertyColorSelectHandler('')}
-						>
-							Any
-						</Button>
-						<Button
-							sx={{
-								borderRadius: 0,
-								border: searchFilter?.search?.colorList?.includes('White') ? '2px solid #181A20' : '1px solid #b9b9b9',
-								borderLeft: searchFilter?.search?.colorList?.includes('White') ? undefined : 'none',
-							}}
-							onClick={() => propertyColorSelectHandler('White')}
-						>
-							White
-						</Button>
-						<Button
-							sx={{
-								borderRadius: 0,
-								border: searchFilter?.search?.colorList?.includes('Black') ? '2px solid #181A20' : '1px solid #b9b9b9',
-								borderLeft: searchFilter?.search?.colorList?.includes('Black') ? undefined : 'none',
-							}}
-							onClick={() => propertyColorSelectHandler('Black')}
-						>
-							Black
-						</Button>
-						<Button
-							sx={{
-								borderRadius: 0,
-								border: searchFilter?.search?.colorList?.includes('Red') ? '2px solid #181A20' : '1px solid #b9b9b9',
-								borderLeft: searchFilter?.search?.colorList?.includes('Red') ? undefined : 'none',
-							}}
-							onClick={() => propertyColorSelectHandler('Red')}
-						>
-							Red
-						</Button>
-						<Button
-							sx={{
-								borderRadius: 0,
-								border: searchFilter?.search?.colorList?.includes('Blue') ? '2px solid #181A20' : '1px solid #b9b9b9',
-								borderLeft: searchFilter?.search?.colorList?.includes('Blue') ? undefined : 'none',
-								borderRight: searchFilter?.search?.colorList?.includes('Blue') ? undefined : 'none',
-							}}
-							onClick={() => propertyColorSelectHandler('Blue')}
-						>
-							Blue
-						</Button>
-						<Button
-							sx={{
-								borderRadius: '0 12px 12px 0',
-								border: searchFilter?.search?.colorList?.includes('Orange') ? '2px solid #181A20' : '1px solid #b9b9b9',
-							}}
-							onClick={() => propertyColorSelectHandler('Orange')}
-						>
-							Orange
-						</Button>
-					</Stack>
-				</Stack> */}
 
 				<Stack className={'find-your-home'} mb={'30px'}>
 					<p className={'title'} style={{ textShadow: '0px 3px 4px #b9b9b9' }}>
@@ -935,7 +745,7 @@ const Filter = (props: FilterType) => {
 				</Stack> */}
 
 				<Stack className={'find-your-home'} mb={'30px'}>
-					<Typography className={'title'}>Fuel Type</Typography>
+					<Typography className={'title'}>Fuel</Typography>
 					{propertyFuel.map((fuel: string) => (
 						<Stack className={'input-box'} key={fuel}>
 							<Checkbox

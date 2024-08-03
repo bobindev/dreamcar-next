@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { TabContext, TabList, TabPanel } from '@mui/lab';
-import { Stack, Tab, Typography, Button, Pagination } from '@mui/material';
+import { Stack, Tab, Typography, Button, Pagination, Box } from '@mui/material';
 import CommunityCard from '../../libs/components/common/CommunityCard';
 import useDeviceDetect from '../../libs/hooks/useDeviceDetect';
 import withLayoutBasic from '../../libs/components/layout/LayoutBasic';
@@ -34,23 +34,23 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 	if (articleCategory) initialInput.search.articleCategory = articleCategory;
 
 	/** APOLLO REQUESTS **/
-  const [likeTargetBoardArticle] = useMutation(LIKE_TARGET_BOARD_ARTICLE);
+	const [likeTargetBoardArticle] = useMutation(LIKE_TARGET_BOARD_ARTICLE);
 
-  const {
+	const {
 		loading: boardArticlesLoading,
 		data: boardArticlesData,
 		error: boardArticlesError,
 		refetch: boardArticlesRefetch,
 	} = useQuery(GET_BOARD_ARTICLES, {
-    fetchPolicy: 'cache-and-network',
-    variables: {input: searchCommunity},
-    notifyOnNetworkStatusChange: true,
-    onCompleted: (data: T) => {
-      setBoardArticles(data?.getBoardArticles?.list);
-      setTotalCount(data?.getBoardArticles?.metaCounter[0]?.total);
-    },
-  });
-  
+		fetchPolicy: 'cache-and-network',
+		variables: { input: searchCommunity },
+		notifyOnNetworkStatusChange: true,
+		onCompleted: (data: T) => {
+			setBoardArticles(data?.getBoardArticles?.list);
+			setTotalCount(data?.getBoardArticles?.metaCounter[0]?.total);
+		},
+	});
+
 	/** LIFECYCLES **/
 	useEffect(() => {
 		if (!query?.articleCategory)
@@ -83,23 +83,23 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 		setSearchCommunity({ ...searchCommunity, page: value });
 	};
 
-  const likeArticleHanler = async (e: any, user: any, id: string) => {
-    try {
-      e.stopPropagation();
-      if(!id) return;
-      if(!user._id) throw new Error(Messages.error2);
+	const likeArticleHanler = async (e: any, user: any, id: string) => {
+		try {
+			e.stopPropagation();
+			if (!id) return;
+			if (!user._id) throw new Error(Messages.error2);
 
-      await likeTargetBoardArticle({ variables: {input: id}});
-      await boardArticlesRefetch({
-        input: searchCommunity
-      });
+			await likeTargetBoardArticle({ variables: { input: id } });
+			await boardArticlesRefetch({
+				input: searchCommunity,
+			});
 
-      await sweetTopSmallSuccessAlert("success", 800);
-    } catch (err: any) {
-      console.log("Error, likeTargetBoardArticle:", err.message);
-      sweetMixinErrorAlert(err.message).then();
-    }
-  };
+			await sweetTopSmallSuccessAlert('success', 800);
+		} catch (err: any) {
+			console.log('Error, likeTargetBoardArticle:', err.message);
+			sweetMixinErrorAlert(err.message).then();
+		}
+	};
 
 	if (device === 'mobile') {
 		return <h1>COMMUNITY PAGE MOBILE</h1>;
@@ -110,42 +110,43 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 					<TabContext value={searchCommunity.search.articleCategory}>
 						<Stack className="main-box">
 							<Stack className="left-config">
-								<Stack className={'image-info'}>
-									<Stack className={'community-name'}>
-										<Typography className={'name'}>Dreamcar Community</Typography>
-									</Stack>
-								</Stack>
-
 								<TabList
-									orientation="vertical"
+									orientation="horizontal"
 									aria-label="lab API tabs example"
 									TabIndicatorProps={{
-										style: { display: 'none' },
+										style: {},
 									}}
+                  sx={{ 
+                    display: 'flex', 
+                    justifyContent: 'space-between',
+                    gap: '20px', 
+                    width: '100%' }}
+									className="table-list"
 									onChange={tabChangeHandler}
 								>
-									<Tab
-										value={'FREE'}
-										label={'Free Board'}
-										className={`tab-button ${searchCommunity.search.articleCategory == 'FREE' ? 'active' : ''}`}
-									/>
-									<Tab
-										value={'RECOMMEND'}
-										label={'Recommendation'}
-										className={`tab-button ${searchCommunity.search.articleCategory == 'RECOMMEND' ? 'active' : ''}`}
-									/>
-									<Tab
-										value={'NEWS'}
-										label={'News'}
-										className={`tab-button ${searchCommunity.search.articleCategory == 'NEWS' ? 'active' : ''}`}
-									/>
-									<Tab
-										value={'HUMOR'}
-										label={'Humor'}
-										className={`tab-button ${searchCommunity.search.articleCategory == 'HUMOR' ? 'active' : ''}`}
-									/>
+										<Tab
+											value={'FREE'}
+											label={'Free Board'}
+											className={`tab-button ${searchCommunity.search.articleCategory == 'FREE' ? 'active' : ''}`}
+										/>
+										<Tab
+											value={'RECOMMEND'}
+											label={'Recommendation'}
+											className={`tab-button ${searchCommunity.search.articleCategory == 'RECOMMEND' ? 'active' : ''}`}
+										/>
+										<Tab
+											value={'NEWS'}
+											label={'News'}
+											className={`tab-button ${searchCommunity.search.articleCategory == 'NEWS' ? 'active' : ''}`}
+										/>
+										<Tab
+											value={'HUMOR'}
+											label={'Humor'}
+											className={`tab-button ${searchCommunity.search.articleCategory == 'HUMOR' ? 'active' : ''}`}
+										/>
 								</TabList>
 							</Stack>
+
 							<Stack className="right-config">
 								<Stack className="panel-config">
 									<Stack className="title-box">
@@ -174,7 +175,13 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 										<Stack className="list-box">
 											{totalCount ? (
 												boardArticles?.map((boardArticle: BoardArticle) => {
-													return <CommunityCard boardArticle={boardArticle} likeArticleHanler={likeArticleHanler} key={boardArticle?._id} />;
+													return (
+														<CommunityCard
+															boardArticle={boardArticle}
+															likeArticleHanler={likeArticleHanler}
+															key={boardArticle?._id}
+														/>
+													);
 												})
 											) : (
 												<Stack className={'no-data'}>
@@ -188,7 +195,13 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 										<Stack className="list-box">
 											{totalCount ? (
 												boardArticles?.map((boardArticle: BoardArticle) => {
-													return <CommunityCard boardArticle={boardArticle} likeArticleHanler={likeArticleHanler} key={boardArticle?._id} />;
+													return (
+														<CommunityCard
+															boardArticle={boardArticle}
+															likeArticleHanler={likeArticleHanler}
+															key={boardArticle?._id}
+														/>
+													);
 												})
 											) : (
 												<Stack className={'no-data'}>
@@ -202,7 +215,13 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 										<Stack className="list-box">
 											{totalCount ? (
 												boardArticles?.map((boardArticle: BoardArticle) => {
-													return <CommunityCard boardArticle={boardArticle} likeArticleHanler={likeArticleHanler} key={boardArticle?._id} />;
+													return (
+														<CommunityCard
+															boardArticle={boardArticle}
+															likeArticleHanler={likeArticleHanler}
+															key={boardArticle?._id}
+														/>
+													);
 												})
 											) : (
 												<Stack className={'no-data'}>
@@ -216,7 +235,13 @@ const Community: NextPage = ({ initialInput, ...props }: T) => {
 										<Stack className="list-box">
 											{totalCount ? (
 												boardArticles?.map((boardArticle: BoardArticle) => {
-													return <CommunityCard boardArticle={boardArticle} likeArticleHanler={likeArticleHanler} key={boardArticle?._id} />;
+													return (
+														<CommunityCard
+															boardArticle={boardArticle}
+															likeArticleHanler={likeArticleHanler}
+															key={boardArticle?._id}
+														/>
+													);
 												})
 											) : (
 												<Stack className={'no-data'}>

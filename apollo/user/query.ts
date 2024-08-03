@@ -391,59 +391,58 @@ export const GET_VISITED = gql`
 
 export const GET_BOARD_ARTICLE = gql`
 	query GetBoardArticle($input: String!) {
-    getBoardArticle(articleId: $input) {
-        _id
-        articleCategory
-        articleStatus
-        articleTitle
-        articleContent
-        articleImage
-        articleViews
-        articleLikes
-        articleComments
-        memberId
-        createdAt
-        updatedAt
-        memberData {
-            _id
-            memberType
-            memberStatus
-            memberAuthType
-            memberPhone
-            memberNick
-            memberFullName
-            memberImage
-            memberAddress
-            memberDesc
-            memberProperties
-            memberArticles
-            memberFollowers
-            memberFollowings
-            memberPoints
-            memberLikes
-            memberViews
-            memberComments
-            memberRank
-            memberWarnings
-            memberBlocks
-            deletedAt
-            createdAt
-            updatedAt
-            accessToken
-            meLiked {
-                memberId
-                likeRefId
-                myFavorite
-            }
-            meFollowed {
-                followingId
-                followerId
-                myFollowing
-            }
-        }
-    }
-}
-
+		getBoardArticle(articleId: $input) {
+			_id
+			articleCategory
+			articleStatus
+			articleTitle
+			articleContent
+			articleImage
+			articleViews
+			articleLikes
+			articleComments
+			memberId
+			createdAt
+			updatedAt
+			memberData {
+				_id
+				memberType
+				memberStatus
+				memberAuthType
+				memberPhone
+				memberNick
+				memberFullName
+				memberImage
+				memberAddress
+				memberDesc
+				memberProperties
+				memberArticles
+				memberFollowers
+				memberFollowings
+				memberPoints
+				memberLikes
+				memberViews
+				memberComments
+				memberRank
+				memberWarnings
+				memberBlocks
+				deletedAt
+				createdAt
+				updatedAt
+				accessToken
+				meLiked {
+					memberId
+					likeRefId
+					myFavorite
+				}
+				meFollowed {
+					followingId
+					followerId
+					myFollowing
+				}
+			}
+		}
+	}
 `;
 
 export const GET_BOARD_ARTICLES = gql`
@@ -650,6 +649,51 @@ export const GET_MEMBER_FOLLOWINGS = gql`
 			metaCounter {
 				total
 			}
+		}
+	}
+`;
+
+/**************************
+ *     NOTIFICATION       *
+ *************************/
+
+export const GET_NOTIFICATIONS = gql`
+	query GetNotificationsByUserId($userId: String!) {
+		getNotificationsByUserId(userId: $userId) {
+			_id
+			notificationType
+			notificationStatus
+			notificationGroup
+			notificationTitle
+			notificationDesc
+			authorId
+			receiverId
+			propertyId
+			articleId
+			createdAt
+		}
+	}
+`;
+
+export const MARK_NOTIFICATION_READ = gql`
+	mutation MarkNotificationAsRead($notificationId: String!) {
+		markNotificationAsRead(notificationId: $notificationId)
+	}
+`;
+
+/**************************
+ *    CONTACT MESSAGE      *
+ *************************/
+export const GET_MESSAGE = gql`
+	query GetMessage($input: ContactsInquiry!) {
+		getMessage(input: $input) {
+			_id
+			name
+			phone
+			email
+			message
+			contactRefId
+			memberId
 		}
 	}
 `;

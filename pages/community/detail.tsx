@@ -239,43 +239,7 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 			<div id="community-detail-page">
 				<div className="container">
 					<Stack className="main-box">
-						<Stack className="left-config">
-							<Stack className={'image-info'}>
-								<Stack className={'community-name'}>
-									<Typography className={'name'}>Community Board Article</Typography>
-								</Stack>
-							</Stack>
-							<Tabs
-								orientation="vertical"
-								aria-label="lab API tabs example"
-								TabIndicatorProps={{
-									style: { display: 'none' },
-								}}
-								onChange={tabChangeHandler}
-								value={articleCategory}
-							>
-								<Tab
-									value={'FREE'}
-									label={'Free Board'}
-									className={`tab-button ${articleCategory === 'FREE' ? 'active' : ''}`}
-								/>
-								<Tab
-									value={'RECOMMEND'}
-									label={'Recommendation'}
-									className={`tab-button ${articleCategory === 'RECOMMEND' ? 'active' : ''}`}
-								/>
-								<Tab
-									value={'NEWS'}
-									label={'News'}
-									className={`tab-button ${articleCategory === 'NEWS' ? 'active' : ''}`}
-								/>
-								<Tab
-									value={'HUMOR'}
-									label={'Humor'}
-									className={`tab-button ${articleCategory === 'HUMOR' ? 'active' : ''}`}
-								/>
-							</Tabs>
-						</Stack>
+						
 						<div className="community-detail-config">
 							<Stack className="title-box">
 								<Stack className="left">
@@ -513,6 +477,43 @@ const CommunityDetail: NextPage = ({ initialInput, ...props }: T) => {
 								)}
 							</div>
 						</div>
+            <Stack className="right-config">
+							<Stack className={'image-info'}>
+								<Stack className={'community-name'}>
+									<Typography className={'name'}>Community Board Article</Typography>
+								</Stack>
+							</Stack>
+							<Tabs
+								orientation="vertical"
+								aria-label="lab API tabs example"
+								TabIndicatorProps={{
+									style: { display: 'none' },
+								}}
+								onChange={tabChangeHandler}
+								value={articleCategory}
+							>
+								<Tab
+									value={'FREE'}
+									label={'Free Board'}
+									className={`tab-button ${articleCategory === 'FREE' ? 'active' : ''}`}
+								/>
+								<Tab
+									value={'RECOMMEND'}
+									label={'Recommendation'}
+									className={`tab-button ${articleCategory === 'RECOMMEND' ? 'active' : ''}`}
+								/>
+								<Tab
+									value={'NEWS'}
+									label={'News'}
+									className={`tab-button ${articleCategory === 'NEWS' ? 'active' : ''}`}
+								/>
+								<Tab
+									value={'HUMOR'}
+									label={'Humor'}
+									className={`tab-button ${articleCategory === 'HUMOR' ? 'active' : ''}`}
+								/>
+							</Tabs>
+						</Stack>
 					</Stack>
 				</div>
 			</div>

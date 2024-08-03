@@ -56,23 +56,23 @@ const withLayoutBasic = (Component: any) => {
 				case '/community/detail':
 					title = 'Community Detail';
 					desc = 'Car / For Rent';
-					bgImage = '/img/banner/header2.svg';
+					bgImage = '/img/banner/comunity.jpg';
 					break;
 				case '/cs':
 					title = 'CS';
 					desc = 'We are glad to see you again!';
-					bgImage = '/img/banner/header2.svg';
+					bgImage = '/img/banner/car-collection.jpg';
 					break;
 				case '/account/join':
 					title = 'Login/Signup';
 					desc = 'Authentication Process';
-					bgImage = '/img/banner/header2.svg';
+					bgImage = '/img/banner/car-collection.jpg';
 					setAuthHeader(true);
 					break;
 				case '/member':
 					title = 'Member Page';
-					desc = 'Home / For Rent';
-					bgImage = '/img/banner/header1.svg';
+					desc = 'Car / For Rent';
+					bgImage = '/img/banner/mycar.webp';
 					break;
 				default:
 					break;
@@ -132,7 +132,11 @@ const withLayoutBasic = (Component: any) => {
 							}}
 						>
 							<Stack className={'container'}
-              
+              sx={{
+                '& strong, & span': {
+                  textShadow: '3px 3px 6px rgba(0, 0, 0, 0.7)',
+                }
+              }}
               >
 								<strong >{t(memoizedValues.title)}</strong>
 								<span>{t(memoizedValues.desc)}</span>

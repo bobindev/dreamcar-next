@@ -16,7 +16,7 @@
 					font-family: $font;
 					font-size: 34px;
 					font-style: normal;
-					font-weight: 500;
+					font-weight: 600;
 					line-height: 150%;
 					letter-spacing: -0.646px;
 					text-transform: capitalize;
@@ -27,7 +27,7 @@
 				p {
 					color: #181a20;
 					font-family: $font;
-					font-size: 14px;
+					font-size: 18px;
 					font-style: normal;
 					font-weight: 400;
 					line-height: 26px;
@@ -123,6 +123,12 @@
 			background: #eef1fb;
 			.container {
 				flex-direction: column;
+				.info-box {
+					.left {
+						align-items: center;
+						margin-left: 40%;
+					}
+				}
 				.card-box {
 					position: relative;
 					margin-top: 64px;
@@ -167,20 +173,25 @@
 							background-size: cover;
 							border-radius: 12px 12px 0px 0px;
 
-							cursor: pointer;
-							div {
+							.view-like-box {
+								display: flex;
+								flex-direction: row;
+								align-items: center;
 								position: absolute;
-								padding: 8px 12px;
-								left: 12px;
-								bottom: 12px;
+								padding: 5px 8px;
+								right: 10px;
+								top: 10px;
 								border-radius: 6px;
 								background: #fff;
-								color: #181a20;
-								font-family: $font;
-								font-size: 15px;
-								font-style: normal;
-								font-weight: 600;
-								line-height: normal;
+								.view-cnt {
+									color: #717171;
+									font-family: $font;
+									font-size: 13px;
+									font-style: normal;
+									font-weight: 400;
+									line-height: normal;
+									text-overflow: ellipsis;
+								}
 							}
 						}
 						.info {
@@ -189,10 +200,10 @@
 							flex-direction: column;
 							box-sizing: border-box;
 							border-radius: 0px 0px 12px 12px;
-							border: 1px solid rgba(196, 196, 196, 0.71);
+							//border: 1px solid rgba(196, 196, 196, 0.71);
 							border-top: none;
 							background: #fff;
-							box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
+							//box-shadow: 0px 1px 4px 0px rgba(24, 26, 32, 0.07);
 							.title {
 								overflow: hidden;
 								color: #181a20;
@@ -204,7 +215,6 @@
 								font-weight: 600;
 								line-height: normal;
 								text-transform: capitalize;
-								cursor: pointer;
 							}
 							.desc {
 								margin-top: 5px;
@@ -255,25 +265,26 @@
 									line-height: normal;
 									text-transform: capitalize;
 								}
-								button {
-									margin-left: 7px;
-									width: 16px;
-									height: 16px;
-									box-sizing: border-box;
-								}
-								.view-like-box {
+								.detail {
 									display: flex;
 									flex-direction: row;
-									gap: 7px;
+									justify-content: center;
 									align-items: center;
-									.view-cnt {
-										color: #717171;
-										font-family: $font;
-										font-size: 13px;
-										font-style: normal;
-										font-weight: 400;
-										line-height: normal;
-										text-overflow: ellipsis;
+									color: #181a20;
+									font-family: $font;
+									font-size: 13px;
+									font-style: normal;
+									font-weight: 400;
+									line-height: normal;
+									text-transform: capitalize;
+									gap: 5px;
+                  &:hover {
+                    color: #eb6753;
+                    cursor: pointer;
+                  }
+									img {
+										width: 14px;
+										height: 14px;
 									}
 								}
 							}
@@ -1012,7 +1023,7 @@
 				position: relative;
 				display: flex;
 				flex-direction: column;
-        justify-content: center;
+				justify-content: center;
 				.box-title {
 					//display: flex;
 					width: 600px;
@@ -1033,7 +1044,7 @@
 					width: 296.48px;
 					height: 63.22px;
 					padding: 10px;
-          margin-top: 10px;
+					margin-top: 10px;
 					color: #eb6753;
 					justify-content: center;
 					align-items: center;

@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Top from '../Top';
 import Footer from '../Footer';
 import { Stack } from '@mui/material';
-import FiberContainer from '../common/FiberContainer';
+//import FiberContainer from '../common/FiberContainer';
 import HeaderFilter from '../homepage/HeaderFilter';
 import { userVar } from '../../../apollo/store';
 import { useReactiveVar } from '@apollo/client';
@@ -62,7 +62,6 @@ const withLayoutMain = (Component: any) => {
 						</Stack>
 
 						<Stack className={'header-main'}>
-							{/* <FiberContainer /> */}
               <Stack className={'head-title'}>FIND YOUR DREAM CAR</Stack>
 							<Stack className={'container'}>
 								<HeaderFilter />

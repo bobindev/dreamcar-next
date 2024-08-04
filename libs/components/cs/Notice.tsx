@@ -51,7 +51,7 @@ const Notice = () => {
 				<Stack className={'main'}>
 					<Box component={'div'} className={'top'}>
 						<span>#</span>
-						<span>title</span>
+						<span >title</span>
 						<span>date</span>
 					</Box>
 					<Stack className={'bottom'}>

@@ -120,18 +120,10 @@
                 flex-direction: row;
                 justify-content: space-between;
                 border: 1px solid #EEE;
+                background-color: #fff;
+                border-radius: 0 0 5px 5px;
                 &.event {
                   background: #F6D79A;
-                }
-                div {
-                  padding: 6px 9px;
-                  border-radius: 12px;
-                  border: 1px solid #EB6753;
-                  color: #EB6753;
-                  font-family: $font;
-                  font-size: 12px;
-                  font-style: normal;
-                  font-weight: 400;
                 }
                 .notice-number {
                   margin-left: 18px;

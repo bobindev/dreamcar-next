@@ -61,7 +61,7 @@ const withAdminLayout = (Component: ComponentType) => {
 		if (!user || user?.memberType !== MemberType.ADMIN) return null;
 
 		return (
-			<main id="pc-wrap" className="admin">
+			<main id="pc-wrap" className="admin" >
 				<Box component={'div'} sx={{ display: 'flex' }}>
 					<AppBar
 						position="fixed"
@@ -141,8 +141,15 @@ const withAdminLayout = (Component: ComponentType) => {
 						className="aside"
 					>
 						<Toolbar sx={{ flexDirection: 'column', alignItems: 'flexStart' }}>
-							<Stack className={'logo-box'}>
-								<img src={'/img/logo/logoText.svg'} alt={'logo'} />
+							<Stack className={'logo-box'} style={{color: '#000',
+                  fontFamily: '$font',
+                  fontSize: '20px',
+                  fontStyle: 'normal',
+                  fontWeight: 600,
+                  lineHeight:' normal',
+                  textTransform: 'capitalize',
+                  }}>
+                DREAMCAR
 							</Stack>
 
 							<Stack

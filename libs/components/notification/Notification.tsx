@@ -81,116 +81,78 @@ export default function BasicPopover() {
 		},
 	});
 
-	// return (
-	// 	<div>
-	// 		<Badge
-	// 			badgeContent={
-	// 				notification?.filter(
-	// 					(ele) => ele.receiverId === user._id && ele.notificationStatus === NotificationStatus.WAIT,
-	// 				).length
-	// 			}
-	// 			color="secondary"
-	// 		>
-	// 			<Button onClick={(event) => handleClick(event)} style={{ padding: 0, minWidth: 0 }}>
-	// 				<NotificationsOutlinedIcon style={{ cursor: 'pointer', color: 'white' }} />
-	// 			</Button>
-	// 		</Badge>
-	// 		<Popover
-	// 			sx={{ marginTop: 5 }}
-	// 			style={{ height: '500px', }}
-	// 			id={id}
-	// 			open={open}
-	// 			anchorEl={anchorEl}
-	// 			onClose={handleClose}
-	// 			anchorOrigin={{
-	// 				vertical: 'bottom',
-	// 				horizontal: 'left',
-	// 			}}
-	// 		>
-	// 			{notification?.map((ele: Notification) => {
-	// 				if (ele.receiverId === user._id) {
-	// 					return (
-	// 						<Stack key={ele._id} sx={{ m: 3, cursor: 'pointer' }} onClick={() => handleClickRead(ele)}>
-	// 							<div
-	// 								style={{
-	// 									background: ele.notificationStatus === NotificationStatus.READ ? 'white' : '#e0dfdf',
-	// 									padding: '15px',
-	// 									borderRadius: '10px',
-	// 									border: '1px solid black',
-	// 									width: '400px',
-	// 								}}
-	// 							>
-	// 								<Typography>{ele.notificationTitle}</Typography>
-	// 								<Typography>{ele.notificationDesc}</Typography>
-	// 								<Typography variant="body2" color="textSecondary">
-	// 									{dayjs(ele.createdAt).fromNow()}
-	// 								</Typography>
-	// 							</div>
-	// 						</Stack>
-	// 					);
-	// 				}
-	// 			})}
-	// 		</Popover>
-	// 	</div>
-	// );
-
-  return (
-    <div>
-      <Badge
-        badgeContent={
-          notification?.filter(
-            (ele) => ele.receiverId === user._id && ele.notificationStatus === NotificationStatus.WAIT,
-          ).length
-        }
-        color="secondary"
-      >
-        <Button onClick={(event) => handleClick(event)} style={{ padding: 0, minWidth: 0 }}>
-          <NotificationsOutlinedIcon style={{ cursor: 'pointer', color: 'white' }} />
-        </Button>
-      </Badge>
-      <Popover
-        sx={{ marginTop: 5 }}
-        style={{ maxHeight: '500px'}}
-        id={id}
-        open={open}
-        anchorEl={anchorEl}
-        onClose={handleClose}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-      >
-        {notification.filter(ele => ele.receiverId === user._id).length > 0 ? (
-          notification?.map((ele: Notification) => {
-            if (ele.receiverId === user._id) {
-              return (
-                <Stack key={ele._id} sx={{ m: 3, cursor: 'pointer' }} onClick={() => handleClickRead(ele)}>
-                  <div
-                    style={{
-                      background: ele.notificationStatus === NotificationStatus.READ ? 'white' : '#e0dfdf',
-                      padding: '15px',
-                      borderRadius: '10px',
-                      border: '1px solid black',
-                      width: '350px',
-                    }}
-                  >
-                    <Typography>{ele.notificationTitle}</Typography>
-                    <Typography>{ele.notificationDesc}</Typography>
-                    <Typography variant="body2" color="textSecondary">
-                      {dayjs(ele.createdAt).fromNow()}
-                    </Typography>
-                  </div>
-                </Stack>
-              );
-            }
-          })
-        ) : (
-          <Stack sx={{ m: 3, width: '400px', height: '100px', justifyContent: 'center', alignItems: 'center', borderRadius: '10px',
-            border: '1px solid black' }}>
-            <Typography>No notifications</Typography>
-          </Stack>
-        )}
-      </Popover>
-    </div>
-  );
+	return (
+		<div>
+			<Badge
+				badgeContent={
+					notification?.filter(
+						(ele) => ele.receiverId === user._id && ele.notificationStatus === NotificationStatus.WAIT,
+					).length
+				}
+				color="secondary"
+			>
+				<Button onClick={(event) => handleClick(event)} style={{ padding: 0, minWidth: 0 }}>
+					<NotificationsOutlinedIcon style={{ cursor: 'pointer', color: 'white' }} />
+				</Button>
+			</Badge>
+			<Popover
+				sx={{
+					marginTop: 5, 
+				}}
+				style={{
+					maxHeight: '500px',
+					width: '600px',
+					borderRadius: '10px', 
+				}}
+				id={id}
+				open={open}
+				anchorEl={anchorEl}
+				onClose={handleClose}
+				anchorOrigin={{
+					vertical: 'bottom',
+					horizontal: 'right',
+				}}
+			>
+				{notification.filter((ele) => ele.receiverId === user._id).length > 0 ? (
+					notification?.map((ele: Notification) => {
+						if (ele.receiverId === user._id) {
+							return (
+								<Stack key={ele._id} sx={{ m: 3, cursor: 'pointer' }} onClick={() => handleClickRead(ele)}>
+									<div
+										style={{
+											background: ele.notificationStatus === NotificationStatus.READ ? 'white' : '#e0dfdf',
+											padding: '15px',
+											borderRadius: '10px',
+											border: '1px solid black',
+											width: '450px',
+										}}
+									>
+										<Typography>{ele.notificationTitle}</Typography>
+										<Typography>{ele.notificationDesc}</Typography>
+										<Typography variant="body2" color="textSecondary">
+											{dayjs(ele.createdAt).fromNow()}
+										</Typography>
+									</div>
+								</Stack>
+							);
+						}
+					})
+				) : (
+					<Stack
+						sx={{
+							m: 3,
+							width: '400px',
+							height: '100px',
+							justifyContent: 'center',
+							alignItems: 'center',
+							borderRadius: '10px',
+							border: '1px solid black',
+						}}
+					>
+						<Typography>No notifications</Typography>
+					</Stack>
+				)}
+			</Popover>
+		</div>
+	);
 }

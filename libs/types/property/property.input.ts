@@ -30,7 +30,7 @@ interface PISearch {
 	fuelList?: PropertyFuel[];
 	pricesRange?: Range;
 	periodsRange?: PeriodsRange;
-	mileageRange: MileageRange;
+	mileageRange?: MileageRange;
 	text?: string;
 }
 

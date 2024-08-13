@@ -1,5 +1,5 @@
 services:
-  quarter-next:
+  dreamcar-next:
     container_name: dreamcar-next
     restart: always
     image: node:20.10.0

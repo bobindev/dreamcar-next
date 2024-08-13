@@ -91,7 +91,7 @@ export default function BasicPopover() {
 				}
 				color="secondary"
 			>
-				<Button onClick={(event) => handleClick(event)} style={{ padding: 0, minWidth: 0 }}>
+				<Button onClick={(event: any) => handleClick(event)} style={{ padding: 0, minWidth: 0 }}>
 					<NotificationsOutlinedIcon style={{ cursor: 'pointer', color: 'white' }} />
 				</Button>
 			</Badge>
@@ -120,10 +120,9 @@ export default function BasicPopover() {
 								<Stack key={ele._id} sx={{ m: 3, cursor: 'pointer' }} onClick={() => handleClickRead(ele)}>
 									<div
 										style={{
-											background: ele.notificationStatus === NotificationStatus.READ ? 'white' : '#e0dfdf',
+											background: ele.notificationStatus === NotificationStatus.READ ? '#e0dfdf' : '#EEF1FB',
 											padding: '15px',
 											borderRadius: '10px',
-											border: '1px solid black',
 											width: '450px',
 										}}
 									>
@@ -146,7 +145,7 @@ export default function BasicPopover() {
 							justifyContent: 'center',
 							alignItems: 'center',
 							borderRadius: '10px',
-							border: '1px solid black',
+              backgroundColor: '#EEF1FB'
 						}}
 					>
 						<Typography>No notifications</Typography>

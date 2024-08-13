@@ -243,7 +243,7 @@ const Top = () => {
 
 							<div className={'lan-box'}>
 								{/* {user?._id && <NotificationsOutlinedIcon className={'notification-icon'} />} */}
-								{user?._id && <BasicPopover />}
+								{user?._id && <BasicPopover/>}
 								<Button
 									disableRipple
 									className="btn-lang"

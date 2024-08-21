@@ -232,41 +232,7 @@ const AddProperty = ({ initialValues, ...props }: any) => {
 									/>
 								</Stack>
 							</Stack>
-							{/* <Stack className="config-column">
-								<Typography className="title">Make</Typography>
-								<select
-									className={'description-input'}
-									defaultValue={insertPropertyData.propertyMaker || 'select'}
-									value={insertPropertyData.propertyMaker || 'select'}
-									onChange={({ target: { value } }) =>
-										// @ts-ignore
-										setInsertPropertyData({ ...insertPropertyData, propertyMaker: value })
-									}
-								>
-									<>
-										<option selected={true} disabled={true} value={'select'}>
-											Select
-										</option>
-										{['HYUNDAI', 'KIA', 'GENESIS', 'GM', 'SSANGYONG'].map((make: any) => (
-											<option value={`${make}`} key={make}>
-												{make}
-											</option>
-										))}
-									</>
-								</select>
-							</Stack>
-							<Stack className="config-column">
-								<Typography className="title">Model</Typography>
-								<input
-									type="text"
-									className="description-input"
-									placeholder={'Title'}
-									value={insertPropertyData.propertyModel}
-									onChange={({ target: { value } }) =>
-										setInsertPropertyData({ ...insertPropertyData, propertyModel: value })
-									}
-								/>
-							</Stack> */}
+							
 
 							<Stack className="config-row">
 								<Stack className="price-year-after-price">

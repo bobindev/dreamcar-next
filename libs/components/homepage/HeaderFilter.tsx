@@ -167,36 +167,7 @@ const HeaderFilter = (props: HeaderFilterProps) => {
 		[searchFilter],
 	);
 
-	// const propertyFuelSelectHandler = useCallback(
-	// 	async (string: String) => {
-	// 		try {
-	// 			if (string != '') {
-	// 				if (searchFilter?.search?.fuelList?.includes('')) {
-	// 					setSearchFilter({
-	// 						...searchFilter,
-	// 						search: {
-	// 							...searchFilter.search,
-	// 							fuelList: searchFilter?.search?.fuelList?.filter((item: String) => item !== string),
-	// 						},
-	// 					});
-	// 				} else {
-	// 					setSearchFilter({
-	// 						...searchFilter,
-	// 						search: { ...searchFilter.search, fuelList: [...(searchFilter?.search?.fuelList || []), ''] },
-	// 					});
-	// 				}
-	// 			} else {
-	// 				delete searchFilter?.search.fuelList;
-	// 				setSearchFilter({ ...searchFilter });
-	// 			}
 
-	// 			console.log('propertyFuelSelectHandler:', '');
-	// 		} catch (err: any) {
-	// 			console.log('ERROR, propertyFuelSelectHandler:', err);
-	// 		}
-	// 	},
-	// 	[searchFilter],
-	// );
 	const propertyFuelSelectHandler = useCallback(
 		async (e: any) => {
 			try {
